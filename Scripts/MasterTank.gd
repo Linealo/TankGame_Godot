@@ -37,6 +37,7 @@ var isAlive = true						#Is held "true" while the HP of the tank is greater than
 var currentHealth	= startHealth		#Initiate the health value of the tank and set it to the configured startingHealth when loading up the game
 var canShoot = true						#variable that gets set to true once the timer from $ShotTimer withing the class reaches 0 
 var canDash = true
+var isDashing = false
 var cantBeHurt = false					#variable that makes player invurnable after being hit - separate from invincibility through powerUps
 
 #Movement variables
@@ -85,7 +86,7 @@ func _ready():									#Constructor
 	$ShotTimer.wait_time = shotDelay			#Set the class`s configured timers (ShotTimer) wait time value to the object initiated shotDelay so the guy can´t fire before the delay reaches 0. Allows to set "CanShoot" to true if 0
 
 func _process(delta):
-	pass
+	handleTankTracks()
 
 #Physics Process processes the games physics, i.e. movement, every frame
 func _physics_process(delta): 			#NOTE: Detla =>  time elapsed during a frame, used to control the display of movement based on frame time. IE 120 Pixel/sec movement with a delta of 60FPS (1/60), makes the player move 2px every frame or 120pixels every second
@@ -287,6 +288,18 @@ func dash(delta):
 	$DashTimer.start()
 	position += transform.x * moveSpeed * delta
 
+#Handle when the tank draws tracks with its particle emitter
+func handleTankTracks():	
+	#If the tank is moving or rotate inputs are being made, activate the emission of particles to be left behind
+	if velocity != Vector2(0,0) or Input.is_action_pressed(rtrKey) or Input.is_action_pressed(rtlKey):
+		if $TankTracks.emitting == false:
+			#print("TankTracks enabled")
+			$TankTracks.emitting = true
+	elif velocity == Vector2(0,0):
+		if $TankTracks.emitting == true:
+			#print("TankTracks disabled")
+			$TankTracks.emitting = false
+
 #Damage handling
 func heal(amount):																#healing function
 	if currentHealth < startHealth:												#if current health is not greater or equal to maximum health
@@ -366,8 +379,8 @@ func _on_health_change(value):								#signal gets triggered on health change
 func _on_player_died():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().paused = true
-	get_parent().get_node("GameOver").show()
-	get_parent().get_node("GameOver/GameOverOverlay/VBoxContainer/Restart").grab_focus()
+	get_parent().get_parent().get_node("GameOver").show()
+	get_parent().get_parent().get_node("GameOver/GameOverOverlay/VBoxContainer/Restart").grab_focus()
 
 #Timer Timeouts: When the given timer stops,the code inside their respective function will be executed immideatly and automatically
 func _on_shot_timer_timeout():

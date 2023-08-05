@@ -1,12 +1,15 @@
-[gd_scene load_steps=19 format=3 uid="uid://rs65ur780i7r"]
+[gd_scene load_steps=22 format=3 uid="uid://rs65ur780i7r"]
 
 [ext_resource type="Script" path="res://Scripts/MasterTank.gd" id="1_d6udm"]
+[ext_resource type="Texture2D" uid="uid://nc5m8611ei02" path="res://Graphics/models/TankTracksWideV2.png" id="2_1be7q"]
 [ext_resource type="AudioStream" uid="uid://bf3bvthesjttb" path="res://Sounds/Arcade_BitExplosion2.wav" id="2_24dvm"]
 [ext_resource type="Texture2D" uid="uid://cp0spo6ya1puj" path="res://Graphics/Effects/HolyEffects/Holy VFX 01/Holy VFX 01 Impact.png" id="2_atnw4"]
 [ext_resource type="Texture2D" uid="uid://b08dn7nkgux5d" path="res://Graphics/models/Tank5.png" id="2_gukex"]
 [ext_resource type="PackedScene" uid="uid://dgxd31oalsxu5" path="res://Scenes/StatusBar.tscn" id="2_k3uo6"]
+[ext_resource type="Material" uid="uid://dqswdkjt0rmab" path="res://ParticleProcessorMaterials/TankTrackProcessor.tres" id="2_y7hh6"]
 [ext_resource type="AudioStream" uid="uid://b5goeg108wmah" path="res://Sounds/Real_Shot.wav" id="3_6o328"]
 [ext_resource type="AudioStream" uid="uid://bqhx1f46pbbkv" path="res://Sounds/Arcade_Death.wav" id="3_tklmg"]
+[ext_resource type="Script" path="res://Scripts/TankTracks.gd" id="3_tvlc4"]
 [ext_resource type="AudioStream" uid="uid://bl4r8m82yjax1" path="res://Sounds/Real_MetalKlank.wav" id="5_1wjfc"]
 [ext_resource type="PackedScene" uid="uid://bvv1o1aml57et" path="res://Scenes/AnimationHandler.tscn" id="7_wp5jp"]
 
@@ -82,10 +85,21 @@ shotDelay = 2.0
 startHealth = 3
 dashDelay = 2.0
 
+[node name="TankTracks" type="GPUParticles2D" parent="."]
+position = Vector2(-176, 0)
+amount = 20
+process_material = ExtResource("2_y7hh6")
+texture = ExtResource("2_1be7q")
+lifetime = 3.0
+trail_lifetime = 5.0
+trail_sections = 10
+script = ExtResource("3_tvlc4")
+
 [node name="Body" type="Sprite2D" parent="."]
 texture = ExtResource("2_gukex")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-40, 0)
 shape = SubResource("RectangleShape2D_gwn2y")
 

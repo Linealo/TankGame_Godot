@@ -9,7 +9,7 @@ func pauseHandling():
 	if Input.is_action_just_pressed("Pause"):								#When Pause key is hit
 		if self.is_visible():					
 			closePauseMenu()									
-		elif not get_parent().get_node("GameOver").is_visible():	#Only open pause when the GameOver Screen is NOT visible
+		elif not get_parent().get_parent().get_node("GameOver").is_visible():	#Only open pause when the GameOver Screen is NOT visible
 			openPauseMenu()
 	else:
 		return									
@@ -23,7 +23,7 @@ func openPauseMenu():
 	
 func closePauseMenu():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)	
-	if not get_parent().get_node("StartScreen"):					#Don´t unpause the tree if the StartScreen is still loaded but still close the pause menu
+	if not get_parent().get_parent().get_node("StartScreen"):					#Don´t unpause the tree if the StartScreen is still loaded but still close the pause menu
 		get_tree().paused = false
 	hide()		
 	$PauseMusic.stop()
