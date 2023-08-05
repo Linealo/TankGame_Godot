@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://boevsd2mkn655"]
+
+[ext_resource type="Theme" uid="uid://sc8pk13o4m7a" path="res://Themes/DefaultTheme.tres" id="1_7xffk"]
+[ext_resource type="Script" path="res://Scripts/UIButtons.gd" id="1_qjvbr"]
+
+[node name="Button" type="Button"]
+offset_right = 226.0
+offset_bottom = 110.0
+theme = ExtResource("1_7xffk")
+text = "Test
+"
+script = ExtResource("1_qjvbr")
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

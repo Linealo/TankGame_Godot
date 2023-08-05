@@ -1,0 +1,431 @@
+[gd_scene load_steps=16 format=3 uid="uid://4w13qfq3acso"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_5figv"]
+[ext_resource type="PackedScene" uid="uid://n17bp6ihk60" path="res://Scenes/MenuBackground.tscn" id="2_7uklg"]
+[ext_resource type="Texture2D" uid="uid://esw1om03k213" path="res://Graphics/UI/Title_2.png" id="3_tgmrh"]
+[ext_resource type="AudioStream" uid="uid://bgg6hon1iyyiv" path="res://Sounds/Music_Menu_2.wav" id="4_oiqly"]
+[ext_resource type="Theme" uid="uid://sc8pk13o4m7a" path="res://Themes/DefaultTheme.tres" id="4_rpg0w"]
+[ext_resource type="Texture2D" uid="uid://bdm7jrytp5fdg" path="res://Graphics/UI/DM_Petro.png" id="6_781wf"]
+[ext_resource type="PackedScene" uid="uid://boevsd2mkn655" path="res://Scenes/UIButtons.tscn" id="6_2444h"]
+[ext_resource type="Texture2D" uid="uid://bbk3co028nlwu" path="res://Graphics/UI/Title_Options_1.png" id="6_ix4oe"]
+[ext_resource type="Texture2D" uid="uid://cptuvhgxq65op" path="res://Graphics/UI/Title_Credits_1.png" id="6_qle6j"]
+[ext_resource type="Texture2D" uid="uid://o0dmpc3pbiyi" path="res://Graphics/UI/Logo_Hochschule_Bremerhaven_Bitted.png" id="7_jnyhe"]
+[ext_resource type="FontFile" uid="uid://dpf2splurp666" path="res://Fonts/VT323-Regular.ttf" id="8_lu7ut"]
+[ext_resource type="PackedScene" uid="uid://cdaa2u7w22qqj" path="res://Scenes/CRTShader.tscn" id="9_j1w8e"]
+
+[sub_resource type="Shader" id="Shader_uai6i"]
+code = "shader_type canvas_item;
+
+void fragment() {
+	// Place fragment code here.
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1bkms"]
+shader = SubResource("Shader_uai6i")
+
+[sub_resource type="Theme" id="Theme_ulygs"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 420.0
+offset_right = 230.0
+offset_bottom = 420.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5figv")
+metadata/_edit_lock_ = true
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_oiqly")
+volume_db = -6.679
+autoplay = true
+
+[node name="MenuBackground" parent="." instance=ExtResource("2_7uklg")]
+position = Vector2(0, -420)
+ranNrMax = 100
+metadata/_edit_lock_ = true
+
+[node name="MainMenu" type="CanvasLayer" parent="."]
+
+[node name="Title Graphic" type="TextureRect" parent="MainMenu"]
+anchors_preset = -1
+anchor_left = 0.19641
+anchor_top = 0.0691667
+anchor_right = 0.823122
+anchor_bottom = 0.392958
+offset_right = -659.087
+offset_bottom = -209.55
+grow_horizontal = 2
+scale = Vector2(2.17067, 2.17067)
+texture = ExtResource("3_tgmrh")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -227.0
+offset_top = -91.0
+offset_right = 227.0
+offset_bottom = 480.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_rpg0w")
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Start" parent="MainMenu/VBoxContainer" instance=ExtResource("6_2444h")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Quit")
+text = "Start"
+
+[node name="Options" parent="MainMenu/VBoxContainer" instance=ExtResource("6_2444h")]
+visible = false
+layout_mode = 2
+text = "Options"
+
+[node name="Credits" parent="MainMenu/VBoxContainer" instance=ExtResource("6_2444h")]
+layout_mode = 2
+text = "Credits
+"
+
+[node name="Quit" parent="MainMenu/VBoxContainer" instance=ExtResource("6_2444h")]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../Start")
+text = "Quit"
+
+[node name="Options" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="TitleOptions" type="TextureRect" parent="Options"]
+anchors_preset = -1
+anchor_left = 0.19641
+anchor_top = 0.0691667
+anchor_right = 0.823122
+anchor_bottom = 0.392958
+offset_left = -1.4993
+offset_top = -2.99999
+offset_right = -657.588
+offset_bottom = -212.55
+grow_horizontal = 2
+scale = Vector2(2.17067, 2.17067)
+texture = ExtResource("6_ix4oe")
+metadata/_edit_use_anchors_ = true
+
+[node name="Credits" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="TitleCredits" type="TextureRect" parent="Credits"]
+anchors_preset = -1
+anchor_left = 0.19641
+anchor_top = 0.0691667
+anchor_right = 0.823122
+anchor_bottom = 0.392958
+offset_right = -659.087
+offset_bottom = -209.55
+grow_horizontal = 2
+scale = Vector2(2.17067, 2.17067)
+texture = ExtResource("6_qle6j")
+
+[node name="HSplitContainer" type="HBoxContainer" parent="Credits"]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -865.0
+offset_top = 445.0
+offset_right = 928.0
+offset_bottom = -33.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_rpg0w")
+theme_override_constants/separation = 80
+
+[node name="Information" type="VBoxContainer" parent="Credits/HSplitContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Creators" type="VBoxContainer" parent="Credits/HSplitContainer/Information"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Created by" type="Label" parent="Credits/HSplitContainer/Information/Creators"]
+layout_mode = 2
+theme = ExtResource("4_rpg0w")
+text = "Created by"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Credits/HSplitContainer/Information/Creators"]
+layout_mode = 2
+theme_override_constants/separation = 65
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Credits/HSplitContainer/Information/Creators/HBoxContainer"]
+layout_mode = 2
+
+[node name="Name 1" type="Label" parent="Credits/HSplitContainer/Information/Creators/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_rpg0w")
+theme_override_font_sizes/font_size = 60
+text = "Yorick Krauth"
+
+[node name="Name 2" type="Label" parent="Credits/HSplitContainer/Information/Creators/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_rpg0w")
+theme_override_font_sizes/font_size = 60
+text = "Sarah Blank"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Credits/HSplitContainer/Information/Creators/HBoxContainer"]
+layout_mode = 2
+
+[node name="MatrikelNr 1" type="Label" parent="Credits/HSplitContainer/Information/Creators/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("4_rpg0w")
+theme_override_font_sizes/font_size = 60
+text = "38378"
+
+[node name="Matriekl Nr 2" type="Label" parent="Credits/HSplitContainer/Information/Creators/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("4_rpg0w")
+theme_override_font_sizes/font_size = 60
+text = "XXXXX"
+
+[node name="School" type="VBoxContainer" parent="Credits/HSplitContainer/Information"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="School" type="Label" parent="Credits/HSplitContainer/Information/School"]
+layout_mode = 2
+theme = ExtResource("4_rpg0w")
+text = "Information"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Credits/HSplitContainer/Information/School"]
+layout_mode = 2
+theme_override_constants/separation = 88
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Credits/HSplitContainer/Information/School/HBoxContainer"]
+layout_mode = 2
+
+[node name="Dozent" type="Label" parent="Credits/HSplitContainer/Information/School/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_rpg0w")
+theme_override_font_sizes/font_size = 60
+text = "Tutor"
+
+[node name="Institution" type="Label" parent="Credits/HSplitContainer/Information/School/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_rpg0w")
+theme_override_font_sizes/font_size = 60
+text = "Institution"
+
+[node name="Studiengang" type="Label" parent="Credits/HSplitContainer/Information/School/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_rpg0w")
+theme_override_font_sizes/font_size = 60
+text = "Study Subject"
+
+[node name="Modul" type="Label" parent="Credits/HSplitContainer/Information/School/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_rpg0w")
+theme_override_font_sizes/font_size = 60
+text = "Study Module"
+
+[node name="Semester" type="Label" parent="Credits/HSplitContainer/Information/School/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_rpg0w")
+theme_override_font_sizes/font_size = 60
+text = "Semester"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Credits/HSplitContainer/Information/School/HBoxContainer"]
+layout_mode = 2
+
+[node name="Marcos" type="Label" parent="Credits/HSplitContainer/Information/School/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("4_rpg0w")
+theme_override_font_sizes/font_size = 60
+text = "Marcos Martinez"
+
+[node name="HSB" type="Label" parent="Credits/HSplitContainer/Information/School/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("4_rpg0w")
+theme_override_font_sizes/font_size = 60
+text = "Hochschule Bremerhaven"
+
+[node name="DMP" type="Label" parent="Credits/HSplitContainer/Information/School/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("4_rpg0w")
+theme_override_font_sizes/font_size = 60
+text = "Digitale Medienproduktion"
+
+[node name="Creative Programming" type="Label" parent="Credits/HSplitContainer/Information/School/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("4_rpg0w")
+theme_override_font_sizes/font_size = 60
+text = "Creative Programming"
+
+[node name="SoSe 2023" type="Label" parent="Credits/HSplitContainer/Information/School/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("4_rpg0w")
+theme_override_font_sizes/font_size = 60
+text = "SoSe 2023"
+
+[node name="Other" type="VBoxContainer" parent="Credits/HSplitContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Asstes" type="VBoxContainer" parent="Credits/HSplitContainer/Other"]
+layout_mode = 2
+
+[node name="Asstes" type="Label" parent="Credits/HSplitContainer/Other/Asstes"]
+layout_mode = 2
+theme = ExtResource("4_rpg0w")
+text = "Assets
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Credits/HSplitContainer/Other/Asstes"]
+layout_mode = 2
+theme_override_constants/separation = 65
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Credits/HSplitContainer/Other/Asstes/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Music" type="Label" parent="Credits/HSplitContainer/Other/Asstes/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Menu Music"
+
+[node name="Graphics" type="Label" parent="Credits/HSplitContainer/Other/Asstes/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "(Some) Graphics
+& (some) Sounds"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Credits/HSplitContainer/Other/Asstes/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="joshuaempyre" type="Label" parent="Credits/HSplitContainer/Other/Asstes/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "joshuaempyre"
+
+[node name="ItchIo" type="Label" parent="Credits/HSplitContainer/Other/Asstes/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Itch.io with
+Free License"
+
+[node name="Engine Info" type="VBoxContainer" parent="Credits/HSplitContainer/Other"]
+layout_mode = 2
+
+[node name="Engine" type="Label" parent="Credits/HSplitContainer/Other/Engine Info"]
+layout_mode = 2
+theme = ExtResource("4_rpg0w")
+text = "Technical Info"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Credits/HSplitContainer/Other/Engine Info"]
+layout_mode = 2
+theme_override_constants/separation = 65
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Credits/HSplitContainer/Other/Engine Info/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Made with" type="Label" parent="Credits/HSplitContainer/Other/Engine Info/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Made with"
+
+[node name="Version" type="Label" parent="Credits/HSplitContainer/Other/Engine Info/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Version"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Credits/HSplitContainer/Other/Engine Info/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Godot" type="Label" parent="Credits/HSplitContainer/Other/Engine Info/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Godot Game Engine"
+
+[node name="GdotoVersion" type="Label" parent="Credits/HSplitContainer/Other/Engine Info/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "4.1.1  - .net Mono"
+
+[node name="BackToMainMenu" parent="Credits" instance=ExtResource("6_2444h")]
+offset_left = 1186.0
+offset_top = 1015.0
+offset_right = 1638.0
+offset_bottom = 1125.0
+text = "Main Menu
+"
+
+[node name="Shader" type="CanvasLayer" parent="."]
+
+[node name="CRT Shader" parent="Shader" instance=ExtResource("9_j1w8e")]
+
+[node name="OSI" type="CanvasLayer" parent="."]
+
+[node name="DMP" type="TextureRect" parent="OSI"]
+material = SubResource("ShaderMaterial_1bkms")
+offset_left = 1878.0
+offset_top = 1131.0
+offset_right = 3030.0
+offset_bottom = 1866.0
+scale = Vector2(0.0470533, 0.0470533)
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme = SubResource("Theme_ulygs")
+texture = ExtResource("6_781wf")
+expand_mode = 1
+
+[node name="HSB" type="TextureRect" parent="OSI"]
+offset_left = 1760.0
+offset_top = 1134.0
+offset_right = 2526.0
+offset_bottom = 1341.0
+scale = Vector2(0.133753, 0.133753)
+texture = ExtResource("7_jnyhe")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="OSI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -235.0
+offset_top = -27.0
+offset_right = 1565.0
+offset_bottom = 126.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.122387, 0.122387)
+theme_override_fonts/font = ExtResource("8_lu7ut")
+theme_override_font_sizes/font_size = 150
+text = "By Yorick Krauth & Sarah Blank"
+
+[node name="Label" type="Label" parent="OSI"]
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 302.0
+offset_bottom = 154.0
+scale = Vector2(0.113607, 0.113607)
+theme_override_fonts/font = ExtResource("8_lu7ut")
+theme_override_font_sizes/font_size = 150
+text = "@2023"
+
+[connection signal="pressed" from="MainMenu/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Credits/BackToMainMenu" to="." method="_on_back_to_main_menu_pressed"]

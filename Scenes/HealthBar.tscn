@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://5f6vldkta012"]
+
+[ext_resource type="Texture2D" uid="uid://bw71ah1uauyym" path="res://Graphics/UI/PixelUI_Pack/Health_Separate/Health_3.png" id="1_lej75"]
+
+[node name="HeathBar" type="TextureProgressBar"]
+offset_right = 48.0
+offset_bottom = 11.0
+min_value = 100.0
+value = 100.0
+texture_progress = ExtResource("1_lej75")

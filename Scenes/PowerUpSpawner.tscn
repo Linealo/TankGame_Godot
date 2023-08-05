@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://1cq8hv1ctsgr"]
+
+[ext_resource type="Script" path="res://Scripts/PowerUpSpawner.gd" id="1_80pvg"]
+[ext_resource type="PackedScene" uid="uid://g510njiavpr0" path="res://Scenes/PowerUp.tscn" id="2_j8jrx"]
+[ext_resource type="Texture2D" uid="uid://dj6e6ts4p5khg" path="res://Graphics/Collections/PixelLoot/Seperate/tile015.png" id="3_6s8pf"]
+
+[node name="PowerUpSpawner" type="Node2D"]
+script = ExtResource("1_80pvg")
+PowerUpCollection = ExtResource("2_j8jrx")
+spawnDelay = 5
+spawnChance = 100
+
+[node name="PlaceHolder" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(5, 5)
+texture = ExtResource("3_6s8pf")
+
+[node name="SpawnDelay" type="Timer" parent="."]
+one_shot = true
+autostart = true

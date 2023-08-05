@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://io5wda562yoa"]
+
+[ext_resource type="PackedScene" uid="uid://rs65ur780i7r" path="res://Scenes/MasterTank.tscn" id="1_tcv3e"]
+[ext_resource type="Script" path="res://Scripts/MenuTank.gd" id="2_6u4sk"]
+[ext_resource type="Texture2D" uid="uid://14cv0r3rvlje" path="res://Graphics/models/TankParts.png" id="3_tavsk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pxigo"]
+size = Vector2(401, 320)
+
+[node name="MenuTank" instance=ExtResource("1_tcv3e")]
+position = Vector2(206, 182)
+scale = Vector2(1, 1)
+script = ExtResource("2_6u4sk")
+metadata/_edit_group_ = true
+
+[node name="Body" parent="." index="0"]
+texture = ExtResource("3_tavsk")
+region_enabled = true
+region_rect = Rect2(0, 389, 400, 360)
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_pxigo")
+
+[node name="Canon" parent="." index="2"]
+texture = ExtResource("3_tavsk")
+centered = false
+offset = Vector2(-15, -39)
+region_enabled = true
+region_rect = Rect2(56, 801, 288, 80)
+
+[node name="BulletSpawnPoint" parent="Canon" index="0"]
+position = Vector2(273, 0)
+
+[node name="StatusBar" parent="." index="12"]
+visible = false

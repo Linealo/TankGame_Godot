@@ -1,0 +1,113 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1fpjv8vt8fn"]
+
+[ext_resource type="Theme" uid="uid://sc8pk13o4m7a" path="res://Themes/DefaultTheme.tres" id="1_7mpoo"]
+[ext_resource type="Script" path="res://Scripts/Options.gd" id="1_jvgjo"]
+[ext_resource type="Texture2D" uid="uid://bbk3co028nlwu" path="res://Graphics/UI/Title_Options_1.png" id="1_ocu7a"]
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jvgjo")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.0588235, 0.105882, 1)
+
+[node name="TitleOptions" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.19641
+anchor_top = 0.0691667
+anchor_right = 0.823122
+anchor_bottom = 0.392958
+offset_left = -3.99954
+offset_top = -4.00005
+offset_right = -660.088
+offset_bottom = -213.55
+grow_horizontal = 2
+scale = Vector2(2.17067, 2.17067)
+texture = ExtResource("1_ocu7a")
+metadata/_edit_use_anchors_ = true
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 2
+offset_left = 741.0
+offset_top = 463.0
+offset_right = 1221.0
+offset_bottom = 566.0
+theme = ExtResource("1_7mpoo")
+text = "Game Options
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 439.0
+offset_top = 598.0
+offset_right = 719.0
+offset_bottom = 1007.0
+theme_override_constants/separation = 50
+
+[node name="Visuals" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_7mpoo")
+text = "Visuals"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Visuals2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_7mpoo")
+text = "Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Visuals3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_7mpoo")
+text = "Visuals"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 826.0
+offset_top = 601.0
+offset_right = 1614.0
+offset_bottom = 1016.0
+theme_override_constants/separation = 35
+
+[node name="CRT Toggle" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("1_7mpoo")
+theme_override_font_sizes/font_size = 80
+toggle_mode = true
+text = "   CRT Shader Enabled   "
+
+[node name="CRT Toggle2" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("1_7mpoo")
+theme_override_font_sizes/font_size = 80
+toggle_mode = true
+text = "   CRT Shader Enabled   "
+
+[node name="CRT Toggle3" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("1_7mpoo")
+theme_override_font_sizes/font_size = 80
+toggle_mode = true
+text = "   CRT Shader Enabled   "
+
+[connection signal="pressed" from="VBoxContainer2/CRT Toggle" to="." method="_on_crt_toggle_pressed"]
+[connection signal="pressed" from="VBoxContainer2/CRT Toggle2" to="." method="_on_crt_toggle_pressed"]
+[connection signal="pressed" from="VBoxContainer2/CRT Toggle3" to="." method="_on_crt_toggle_pressed"]

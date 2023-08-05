@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgxd31oalsxu5"]
+
+[ext_resource type="Script" path="res://Scripts/StatusBar.gd" id="1_mehv5"]
+[ext_resource type="Texture2D" uid="uid://10egvog54wy0" path="res://Graphics/UI/HealthBar/Health_3.svg" id="2_uqnky"]
+
+[node name="StatusBar" type="Node2D"]
+position = Vector2(0, -150)
+scale = Vector2(5, 5)
+script = ExtResource("1_mehv5")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+offset_left = -36.0
+offset_top = -71.0
+offset_right = 36.0
+offset_bottom = -31.0
+value = 100.0
+texture_progress = ExtResource("2_uqnky")

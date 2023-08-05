@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://dt37pu15neacu"]
+
+[ext_resource type="PackedScene" uid="uid://rs65ur780i7r" path="res://Scenes/MasterTank.tscn" id="1_r555r"]
+[ext_resource type="Texture2D" uid="uid://14cv0r3rvlje" path="res://Graphics/models/TankParts.png" id="2_tem0b"]
+[ext_resource type="PackedScene" uid="uid://bq4vr4ksejie" path="res://Scenes/Bullet_P1.tscn" id="3_jy53m"]
+[ext_resource type="Script" path="res://Scripts/Tank_P1.gd" id="3_ly5j2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pxigo"]
+size = Vector2(401, 320)
+
+[node name="Tank_P1" instance=ExtResource("1_r555r")]
+scale = Vector2(1, 1)
+script = ExtResource("3_ly5j2")
+bullet = ExtResource("3_jy53m")
+fwKey = "P1_Forward"
+bwKey = "P1_Backward"
+rtlKey = "P1_RotateLeft"
+rtrKey = "P1_RotateRight"
+shootKey = "P1_Shoot"
+dashKey = "P1_Dash"
+metadata/_edit_group_ = true
+
+[node name="Body" parent="." index="0"]
+texture = ExtResource("2_tem0b")
+region_enabled = true
+region_rect = Rect2(0, 389, 400, 360)
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_pxigo")
+
+[node name="Canon" parent="." index="2"]
+texture = ExtResource("2_tem0b")
+centered = false
+offset = Vector2(-15, -39)
+region_enabled = true
+region_rect = Rect2(56, 801, 288, 80)
+
+[node name="BulletSpawnPoint" parent="Canon" index="0"]
+position = Vector2(273, 0)

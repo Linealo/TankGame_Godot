@@ -1,0 +1,246 @@
+[gd_scene load_steps=6 format=3 uid="uid://cnpxbag7w6e06"]
+
+[ext_resource type="Script" path="res://Scripts/PauseMenu.gd" id="1_bppox"]
+[ext_resource type="Theme" uid="uid://sc8pk13o4m7a" path="res://Themes/DefaultTheme.tres" id="2_yrv6n"]
+[ext_resource type="PackedScene" uid="uid://boevsd2mkn655" path="res://Scenes/UIButtons.tscn" id="3_iiwy2"]
+[ext_resource type="PackedScene" uid="uid://dpc7oxwud2dot" path="res://Scenes/KeyAnimations.tscn" id="3_pqxje"]
+[ext_resource type="AudioStream" uid="uid://cfuglc6mfn6cn" path="res://Sounds/Music_Menu_Pause_Edited.wav" id="4_ia8w5"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bppox")
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0.101961, 0.560784)
+
+[node name="InnerBG" type="ColorRect" parent="."]
+layout_mode = 2
+offset_left = -2.0
+offset_top = 204.0
+offset_right = 1957.0
+offset_bottom = 714.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0.141176, 0.137255)
+
+[node name="Main" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -264.0
+offset_top = -132.0
+offset_right = 264.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Main"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_constants/separation = 616
+
+[node name="Pause Title" type="Label" parent="Main/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("2_yrv6n")
+theme_override_font_sizes/font_size = 120
+text = "Game Paused"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Continue" parent="Main/VBoxContainer2/VBoxContainer" instance=ExtResource("3_iiwy2")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Main Menu")
+text = "Continue"
+
+[node name="Options" parent="Main/VBoxContainer2/VBoxContainer" instance=ExtResource("3_iiwy2")]
+visible = false
+layout_mode = 2
+text = "Options"
+
+[node name="Main Menu" parent="Main/VBoxContainer2/VBoxContainer" instance=ExtResource("3_iiwy2")]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../Continue")
+text = "Main Menu"
+
+[node name="InfoText" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 298.0
+offset_top = 197.0
+offset_right = 1682.0
+offset_bottom = 303.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_yrv6n")
+theme_override_constants/separation = -60
+
+[node name="Label" type="Label" parent="InfoText"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Controls"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InfoText"]
+layout_mode = 2
+theme_override_constants/separation = 1000
+alignment = 1
+
+[node name="Label3" type="Label" parent="InfoText/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Player 1
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="InfoText/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Player 2"
+horizontal_alignment = 1
+
+[node name="Keys" type="Container" parent="."]
+layout_mode = 2
+offset_right = 1950.0
+offset_bottom = 511.0
+
+[node name="W" parent="Keys" instance=ExtResource("3_pqxje")]
+position = Vector2(380, 386.5)
+scale = Vector2(5, 5)
+animation = &"W"
+autoplay = "W"
+
+[node name="A" parent="Keys" instance=ExtResource("3_pqxje")]
+position = Vector2(264, 502.5)
+scale = Vector2(5, 5)
+animation = &"A"
+autoplay = "A"
+
+[node name="S" parent="Keys" instance=ExtResource("3_pqxje")]
+position = Vector2(380, 502.5)
+scale = Vector2(5, 5)
+animation = &"S"
+autoplay = "S"
+
+[node name="D" parent="Keys" instance=ExtResource("3_pqxje")]
+position = Vector2(494, 502.5)
+scale = Vector2(5, 5)
+animation = &"D"
+autoplay = "D"
+
+[node name="Space" parent="Keys" instance=ExtResource("3_pqxje")]
+position = Vector2(380, 637)
+scale = Vector2(5, 5)
+animation = &"Space"
+autoplay = "Space"
+
+[node name="Up" parent="Keys" instance=ExtResource("3_pqxje")]
+position = Vector2(1579.5, 386.5)
+scale = Vector2(5, 5)
+animation = &"Up"
+autoplay = "Up"
+
+[node name="Down" parent="Keys" instance=ExtResource("3_pqxje")]
+position = Vector2(1579.5, 502.5)
+scale = Vector2(5, 5)
+animation = &"Down"
+autoplay = "Down"
+
+[node name="Left" parent="Keys" instance=ExtResource("3_pqxje")]
+position = Vector2(1463.5, 502.5)
+scale = Vector2(5, 5)
+animation = &"Left"
+autoplay = "Left"
+
+[node name="Right" parent="Keys" instance=ExtResource("3_pqxje")]
+position = Vector2(1693.5, 502.5)
+scale = Vector2(5, 5)
+animation = &"Right"
+autoplay = "Right"
+
+[node name="0" parent="Keys" instance=ExtResource("3_pqxje")]
+position = Vector2(1581, 636)
+scale = Vector2(5, 5)
+autoplay = "0"
+
+[node name="Movement3" type="Label" parent="."]
+layout_mode = 2
+offset_left = 661.0
+offset_top = 474.0
+offset_right = 837.0
+offset_bottom = 517.0
+theme = ExtResource("2_yrv6n")
+theme_override_font_sizes/font_size = 40
+text = "Rotate Left"
+horizontal_alignment = 1
+
+[node name="Movement2" type="Label" parent="."]
+layout_mode = 2
+offset_left = 903.0
+offset_top = 474.0
+offset_right = 1047.0
+offset_bottom = 517.0
+theme = ExtResource("2_yrv6n")
+theme_override_font_sizes/font_size = 40
+text = "Backwards
+"
+horizontal_alignment = 1
+
+[node name="Movement4" type="Label" parent="."]
+layout_mode = 2
+offset_left = 1110.0
+offset_top = 474.0
+offset_right = 1302.0
+offset_bottom = 517.0
+theme = ExtResource("2_yrv6n")
+theme_override_font_sizes/font_size = 40
+text = "Rotate Right"
+horizontal_alignment = 1
+
+[node name="Movement" type="Label" parent="."]
+layout_mode = 2
+offset_left = 916.0
+offset_top = 363.0
+offset_right = 1028.0
+offset_bottom = 406.0
+theme = ExtResource("2_yrv6n")
+theme_override_font_sizes/font_size = 40
+text = "Forward"
+horizontal_alignment = 1
+
+[node name="Movement5" type="Label" parent="."]
+layout_mode = 2
+offset_left = 884.0
+offset_top = 606.0
+offset_right = 1076.0
+offset_bottom = 649.0
+theme = ExtResource("2_yrv6n")
+theme_override_font_sizes/font_size = 40
+text = "Shoot Bullet
+"
+horizontal_alignment = 1
+
+[node name="PauseMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ia8w5")
+pitch_scale = 0.96
+
+[connection signal="pressed" from="Main/VBoxContainer2/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer2/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer2/VBoxContainer/Main Menu" to="." method="_on_main_menu_pressed"]

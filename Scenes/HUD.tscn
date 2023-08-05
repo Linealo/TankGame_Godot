@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwnryqgu1h2dg"]
+
+[ext_resource type="Script" path="res://Scripts/HUD.gd" id="1_asb2u"]
+[ext_resource type="Texture2D" uid="uid://falugtntreqf" path="res://Graphics/models/Tank1.png" id="1_ihua5"]
+[ext_resource type="Texture2D" uid="uid://bw71ah1uauyym" path="res://Graphics/UI/PixelUI_Pack/Health_Separate/Health_3.png" id="3_j3hmb"]
+[ext_resource type="Texture2D" uid="uid://cp6pr3qwj1js8" path="res://Graphics/models/Tank2.png" id="4_kv5aw"]
+
+[sub_resource type="Theme" id="Theme_aoid7"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_asb2u")
+
+[node name="P1_HUD" type="HBoxContainer" parent="."]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -92.0
+offset_right = 333.0
+offset_bottom = -35.0
+grow_vertical = 0
+scale = Vector2(1.5, 1.5)
+mouse_filter = 2
+theme = SubResource("Theme_aoid7")
+
+[node name="P1_Icon" type="TextureRect" parent="P1_HUD"]
+layout_mode = 2
+texture = ExtResource("1_ihua5")
+expand_mode = 3
+
+[node name="P1_Health" type="TextureRect" parent="P1_HUD"]
+layout_mode = 2
+texture = ExtResource("3_j3hmb")
+expand_mode = 3
+
+[node name="P1_Inv" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 502.5
+offset_top = 1108.0
+offset_right = 502.5
+offset_bottom = 1165.0
+
+[node name="P2_HUD" type="HBoxContainer" parent="."]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1451.0
+offset_top = -93.0
+offset_right = 1778.0
+offset_bottom = -36.0
+grow_vertical = 0
+scale = Vector2(1.5, 1.5)
+mouse_filter = 2
+theme = SubResource("Theme_aoid7")
+
+[node name="P2_Health" type="TextureRect" parent="P2_HUD"]
+layout_mode = 2
+texture = ExtResource("3_j3hmb")
+expand_mode = 3
+flip_h = true
+
+[node name="P2_Icon" type="TextureRect" parent="P2_HUD"]
+layout_mode = 2
+texture = ExtResource("4_kv5aw")
+expand_mode = 3
+flip_h = true
+
+[node name="P2_Inv" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 1947.5
+offset_top = 1107.0
+offset_right = 1947.5
+offset_bottom = 1164.0

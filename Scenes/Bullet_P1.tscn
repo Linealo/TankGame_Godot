@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bq4vr4ksejie"]
+
+[ext_resource type="PackedScene" uid="uid://i0gkrtcu312w" path="res://Scenes/MasterBullet.tscn" id="1_xk0fv"]
+[ext_resource type="Script" path="res://Scripts/Bullet_P1.gd" id="2_6tawd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wx05y"]
+size = Vector2(234, 66)
+
+[node name="Bullet_P1" instance=ExtResource("1_xk0fv")]
+script = ExtResource("2_6tawd")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(117, 0)
+scale = Vector2(1.5, 1.5)
+region_rect = Rect2(122, 951, 156, 44)
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(117, -9.53674e-07)
+shape = SubResource("RectangleShape2D_wx05y")
+one_way_collision_margin = 0.0
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="5"]
+position = Vector2(117, -4.76837e-07)
+scale = Vector2(11.7, 3.4)

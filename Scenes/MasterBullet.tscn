@@ -1,0 +1,92 @@
+[gd_scene load_steps=13 format=3 uid="uid://i0gkrtcu312w"]
+
+[ext_resource type="Script" path="res://Scripts/MasterBullet.gd" id="1_2o4sj"]
+[ext_resource type="PackedScene" uid="uid://dw65nns24va6w" path="res://Scenes/bullet_particles_default.tscn" id="2_33wd7"]
+[ext_resource type="PackedScene" uid="uid://bwvj6g107faxw" path="res://Scenes/bullet_particles_rocket.tscn" id="2_gfexi"]
+[ext_resource type="PackedScene" uid="uid://bvv1o1aml57et" path="res://Scenes/AnimationHandler.tscn" id="4_fvgeb"]
+[ext_resource type="Texture2D" uid="uid://14cv0r3rvlje" path="res://Graphics/models/TankParts.png" id="4_w7cwq"]
+[ext_resource type="Texture2D" uid="uid://bufkakkvh61f1" path="res://Graphics/Effects/FireEffects/Fire Effect 1/Firebolt SpriteSheet.png" id="5_b0e14"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_61nk6"]
+size = Vector2(152, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8xch"]
+atlas = ExtResource("5_b0e14")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o277v"]
+atlas = ExtResource("5_b0e14")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tmshg"]
+atlas = ExtResource("5_b0e14")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vx5y7"]
+atlas = ExtResource("5_b0e14")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mixlt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8xch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o277v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tmshg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vx5y7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tmshg")
+}],
+"loop": true,
+"name": &"fireExhaust",
+"speed": 30.0
+}]
+
+[node name="MasterBullet" type="CharacterBody2D"]
+collision_mask = 15
+script = ExtResource("1_2o4sj")
+trailScene = ExtResource("2_33wd7")
+rocketTrailScene = ExtResource("2_gfexi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(76, 0)
+texture = ExtResource("4_w7cwq")
+region_enabled = true
+region_rect = Rect2(2188, 961, 152, 40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(76, 4.76837e-07)
+shape = SubResource("RectangleShape2D_61nk6")
+
+[node name="PersistanceTimer" type="Timer" parent="."]
+
+[node name="AnimationHandler" parent="." instance=ExtResource("4_fvgeb")]
+visible = false
+animation = &"bulletImpact"
+
+[node name="fireExhaust" type="AnimatedSprite2D" parent="."]
+position = Vector2(-219, -59)
+scale = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_mixlt")
+animation = &"fireExhaust"
+autoplay = "fireExhaust"
+frame_progress = 0.900859
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(76, 4.76837e-07)
+scale = Vector2(7.6, 2)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(500, 0)
+collision_mask = 15
+collide_with_areas = true
+
+[connection signal="animation_finished" from="AnimationHandler" to="." method="_on_animation_handler_animation_finished"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

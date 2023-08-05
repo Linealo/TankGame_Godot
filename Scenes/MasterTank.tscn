@@ -1,0 +1,186 @@
+[gd_scene load_steps=19 format=3 uid="uid://rs65ur780i7r"]
+
+[ext_resource type="Script" path="res://Scripts/MasterTank.gd" id="1_d6udm"]
+[ext_resource type="AudioStream" uid="uid://bf3bvthesjttb" path="res://Sounds/Arcade_BitExplosion2.wav" id="2_24dvm"]
+[ext_resource type="Texture2D" uid="uid://cp0spo6ya1puj" path="res://Graphics/Effects/HolyEffects/Holy VFX 01/Holy VFX 01 Impact.png" id="2_atnw4"]
+[ext_resource type="Texture2D" uid="uid://b08dn7nkgux5d" path="res://Graphics/models/Tank5.png" id="2_gukex"]
+[ext_resource type="PackedScene" uid="uid://dgxd31oalsxu5" path="res://Scenes/StatusBar.tscn" id="2_k3uo6"]
+[ext_resource type="AudioStream" uid="uid://b5goeg108wmah" path="res://Sounds/Real_Shot.wav" id="3_6o328"]
+[ext_resource type="AudioStream" uid="uid://bqhx1f46pbbkv" path="res://Sounds/Arcade_Death.wav" id="3_tklmg"]
+[ext_resource type="AudioStream" uid="uid://bl4r8m82yjax1" path="res://Sounds/Real_MetalKlank.wav" id="5_1wjfc"]
+[ext_resource type="PackedScene" uid="uid://bvv1o1aml57et" path="res://Scenes/AnimationHandler.tscn" id="7_wp5jp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gwn2y"]
+size = Vector2(403.333, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpqmw"]
+atlas = ExtResource("2_atnw4")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0hje"]
+atlas = ExtResource("2_atnw4")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flgcn"]
+atlas = ExtResource("2_atnw4")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6h617"]
+atlas = ExtResource("2_atnw4")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avx7a"]
+atlas = ExtResource("2_atnw4")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3dhsi"]
+atlas = ExtResource("2_atnw4")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sny2n"]
+atlas = ExtResource("2_atnw4")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a5qjl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mpqmw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0hje")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flgcn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6h617")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avx7a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3dhsi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sny2n")
+}],
+"loop": false,
+"name": &"muzzleFire",
+"speed": 30.0
+}]
+
+[node name="MasterTank" type="CharacterBody2D"]
+scale = Vector2(0.3, 0.3)
+collision_layer = 2
+collision_mask = 31
+safe_margin = 0.001
+script = ExtResource("1_d6udm")
+moveSpeed = 200.0
+rotationSpeed = 5.0
+shotDelay = 2.0
+startHealth = 3
+dashDelay = 2.0
+
+[node name="Body" type="Sprite2D" parent="."]
+texture = ExtResource("2_gukex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-40, 0)
+shape = SubResource("RectangleShape2D_gwn2y")
+
+[node name="Canon" type="Sprite2D" parent="."]
+
+[node name="BulletSpawnPoint" type="Marker2D" parent="Canon"]
+position = Vector2(236.667, 0)
+
+[node name="ShotTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DashTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="HurtTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="InvincibilityTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="SpeedUpTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="SlowDownTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="FreezeTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="ReverseTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="RapidFireTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="MiniTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="UltiTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="Sound_BulletShot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_24dvm")
+volume_db = 10.124
+attenuation = 1.51572
+
+[node name="Sound_BulletKlink" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_6o328")
+volume_db = 7.436
+attenuation = 1.51572
+
+[node name="Sound_Death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_tklmg")
+volume_db = 12.885
+attenuation = 2.54912
+
+[node name="Sound_Hurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_1wjfc")
+volume_db = 11.044
+attenuation = 2.54912
+
+[node name="StatusBar" parent="." instance=ExtResource("2_k3uo6")]
+visible = false
+position = Vector2(0, 0)
+
+[node name="AnimationHandler" parent="." instance=ExtResource("7_wp5jp")]
+visible = false
+
+[node name="MuzzleFire" type="AnimatedSprite2D" parent="."]
+visible = false
+scale = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_a5qjl")
+animation = &"muzzleFire"
+
+[connection signal="healthChange" from="." to="." method="_on_health_change"]
+[connection signal="playerDied" from="." to="." method="_on_player_died"]
+[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="HurtTimer" to="." method="_on_hurt_timer_timeout"]
+[connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
+[connection signal="timeout" from="SpeedUpTimer" to="." method="_on_speed_up_timer_timeout"]
+[connection signal="timeout" from="SlowDownTimer" to="." method="_on_slow_down_timer_timeout"]
+[connection signal="timeout" from="FreezeTimer" to="." method="_on_freeze_timer_timeout"]
+[connection signal="timeout" from="ReverseTimer" to="." method="_on_reverse_timer_timeout"]
+[connection signal="timeout" from="RapidFireTimer" to="." method="_on_rapid_fire_timer_timeout"]
+[connection signal="timeout" from="MiniTimer" to="." method="_on_mini_timer_timeout"]
+[connection signal="timeout" from="UltiTimer" to="." method="_on_ulti_timer_timeout"]
+[connection signal="finished" from="Sound_Death" to="." method="_on_sound_death_finished"]
+[connection signal="animation_finished" from="AnimationHandler" to="." method="_on_animation_handler_animation_finished"]
