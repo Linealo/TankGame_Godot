@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcd11ya61d7os"]
+
+[ext_resource type="Texture2D" uid="uid://nc5m8611ei02" path="res://Graphics/models/TankTracksWideV2.png" id="1_8xper"]
+[ext_resource type="Script" path="res://Scripts/TankTracks.gd" id="2_lallp"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nmmpv"]
+gravity = Vector3(0, 0, 0)
+scale_min = 0.55
+scale_max = 0.55
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+position = Vector2(1, 2)
+process_material = SubResource("ParticleProcessMaterial_nmmpv")
+texture = ExtResource("1_8xper")
+local_coords = true
+script = ExtResource("2_lallp")

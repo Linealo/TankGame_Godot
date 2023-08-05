@@ -59,7 +59,7 @@ func reflect():																		#bounces the bullet on hit if bullet can bounce
 		reflectPoof.show()
 		reflectPoof.set_scale(Vector2(1,1))
 		reflectPoof.position = position
-		reflectPoof.rotation = collision.get_normal().angle() + 90							#Set the rotation to the angle of the normal of the collider we´re hitting
+		reflectPoof.rotation = collision.get_normal().angle()							#Set the rotation to the angle of the normal of the collider we´re hitting
 		reflectPoof.play("impactDust")
 		await reflectPoof.animation_finished											#Wait for the animation to finish and delete the animator node after
 		reflectPoof.queue_free()
