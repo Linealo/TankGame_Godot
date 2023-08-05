@@ -1,2 +1,13 @@
 # Godot 4+ specific ignores
 .godot/
+Graphics/
+Sounds/
+Exports/
+Fonts/
+TankGame_01082023.zip
+TankGame_02082023.zip
+TankGame_05082023.zip
+TankGame_20072023.zip
+TankGame_29072023.zip
+TankGame_30072023.zip
+TankGame_31072023.zip
