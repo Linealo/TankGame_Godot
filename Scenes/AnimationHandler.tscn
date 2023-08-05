@@ -414,4 +414,6 @@ animations = [{
 [node name="AnimationHandler" type="AnimatedSprite2D"]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_n00s4")
-animation = &"tankExplosion"
+animation = &"impactDust"
+frame = 5
+frame_progress = 1.0

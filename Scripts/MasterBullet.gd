@@ -34,9 +34,6 @@ func _process(delta):													#Act function of the engine that is called eve
 	if graceTime > 0:
 		graceTime -= 1
 	#Once the gracTime hits 0 or lower, clear the collision exception list (usually TripleShotBullets)
-	if graceTime <= 0:
-		for exception in get_collision_exceptions():
-			remove_collision_exception_with(exception)
 					
 	#position += transform.x * delta * shotSpeed						#move the bullet at a set speed by changing its local x position
 	if rocketTrailActive:
@@ -49,16 +46,34 @@ func _physics_process(delta):
 	if collision && not self.is_queued_for_deletion():
 		impactHandling()
 	
-func reflect():															#bounces the bullet on hit if bullet can bounce and surface is bouncy
-	if bounceAmount >= 1: 												#checks condiditions
-		var new_direction = velocity.bounce(collision.get_normal())
-		rotation = atan2(new_direction.y, new_direction.x)
-		bounceAmount -= 1
+func reflect():																		#bounces the bullet on hit if bullet can bounce and surface is bouncy
+	if bounceAmount >= 1: 															#checks condiditions
+		var new_direction = velocity.bounce(collision.get_normal())					#storage for the new direction, that is equal to the colliders normal
+		rotation = new_direction.angle() #atan2(new_direction.y, new_direction.x)	#Flip the vector of the current rotation by using the arctanges of the new direction vector
+		bounceAmount -= 1														
 		shotSpeed *= 0.8
+		
+		#Handle an impact dust on bounce
+		var reflectPoof = load("res://Scenes/AnimationHandler.tscn").instantiate()
+		add_sibling(reflectPoof)														#Bullet is already instantiated as sibling to the tank on canvas layer, so create sibiling of this again
+		reflectPoof.show()
+		reflectPoof.set_scale(Vector2(1,1))
+		reflectPoof.position = position
+		reflectPoof.rotation = collision.get_normal().angle() + 90							#Set the rotation to the angle of the normal of the collider we´re hitting
+		reflectPoof.play("impactDust")
+		await reflectPoof.animation_finished											#Wait for the animation to finish and delete the animator node after
+		reflectPoof.queue_free()
 	
 func impactHandling():
+	#On impact, check if the grace time has passed and if it did, free all collisions to be active
+	if graceTime <= 0:
+		for exception in get_collision_exceptions():
+			remove_collision_exception_with(exception)
+			
 	emit_signal('objectHit')
+	#update the collider after clearing the collision list to make ithe collider adressable
 	collider = collision.get_collider()
+	
 	#Player hit detection
 	if collider is Tank && collider.has_method("getDamaged"):			#listens to the area body hit, if it has the ability to get damaged
 		collider.getDamaged(shotPower)									#calls the damage function of the hit body and transmits the shotPower of the current bullet to deal the set amount of damage
@@ -92,6 +107,7 @@ func explode(collider):													#handles the explosion animation on hit / de
 		$AnimationHandler.play("bulletImpact")							#play a different impact animation animation
 	else:																#if it is actually a player
 		$AnimationHandler.play("bulletExplosion")						#plays the standard animation
+
 
 func handleRocketTrail():
 	var trail = rocketTrailScene.instantiate() as GPUParticles2D

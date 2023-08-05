@@ -69,7 +69,9 @@ shape = SubResource("RectangleShape2D_61nk6")
 
 [node name="AnimationHandler" parent="." instance=ExtResource("4_fvgeb")]
 visible = false
-animation = &"bulletImpact"
+animation = &"bulletExplosion"
+frame = 0
+frame_progress = 0.0
 
 [node name="fireExhaust" type="AnimatedSprite2D" parent="."]
 position = Vector2(-219, -59)
