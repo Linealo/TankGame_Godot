@@ -1,9 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://t84dudbhvqpm"]
+[gd_scene load_steps=7 format=3 uid="uid://t84dudbhvqpm"]
 
 [ext_resource type="PackedScene" uid="uid://rs65ur780i7r" path="res://Scenes/MasterTank.tscn" id="1_ettkx"]
 [ext_resource type="Script" path="res://Scripts/Tank_P2.gd" id="2_h54ft"]
 [ext_resource type="PackedScene" uid="uid://bmntaqe52u4v4" path="res://Scenes/Bullet_P2.tscn" id="3_dsa5a"]
 [ext_resource type="Texture2D" uid="uid://14cv0r3rvlje" path="res://Graphics/models/TankParts.png" id="4_d3bfs"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x63gh"]
+resource_local_to_scene = true
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.1
+color = Color(1, 1, 1, 0.556863)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yj444"]
 size = Vector2(401, 319)
@@ -20,16 +27,19 @@ shootKey = "P2_Shoot"
 dashKey = "P2_Dash"
 metadata/_edit_group_ = true
 
-[node name="Body" parent="." index="0"]
+[node name="TankTracks" parent="." index="0"]
+process_material = SubResource("ParticleProcessMaterial_x63gh")
+
+[node name="Body" parent="." index="1"]
 texture = ExtResource("4_d3bfs")
 region_enabled = true
 region_rect = Rect2(515, 388, 400, 361)
 
-[node name="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShape2D" parent="." index="2"]
 position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_yj444")
 
-[node name="Canon" parent="." index="2"]
+[node name="Canon" parent="." index="3"]
 texture = ExtResource("4_d3bfs")
 centered = false
 offset = Vector2(-15, -39)

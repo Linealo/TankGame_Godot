@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://rs65ur780i7r"]
+[gd_scene load_steps=25 format=3 uid="uid://rs65ur780i7r"]
 
 [ext_resource type="Script" path="res://Scripts/MasterTank.gd" id="1_d6udm"]
 [ext_resource type="Texture2D" uid="uid://nc5m8611ei02" path="res://Graphics/models/TankTracksWideV2.png" id="2_1be7q"]
@@ -11,6 +11,9 @@
 [ext_resource type="AudioStream" uid="uid://bqhx1f46pbbkv" path="res://Sounds/Arcade_Death.wav" id="3_tklmg"]
 [ext_resource type="Script" path="res://Scripts/TankTracks.gd" id="3_tvlc4"]
 [ext_resource type="AudioStream" uid="uid://bl4r8m82yjax1" path="res://Sounds/Real_MetalKlank.wav" id="5_1wjfc"]
+[ext_resource type="Script" path="res://Scripts/BulletTracer.gd" id="6_2shuy"]
+[ext_resource type="Texture2D" uid="uid://bk12ivopnueyd" path="res://Graphics/Collections/DuskIcons/Dusk_Icons_x24.png" id="7_5ges6"]
+[ext_resource type="Script" path="res://Scripts/Crosshair.gd" id="7_sk5y0"]
 [ext_resource type="PackedScene" uid="uid://bvv1o1aml57et" path="res://Scenes/AnimationHandler.tscn" id="7_wp5jp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gwn2y"]
@@ -108,6 +111,38 @@ shape = SubResource("RectangleShape2D_gwn2y")
 [node name="BulletSpawnPoint" type="Marker2D" parent="Canon"]
 position = Vector2(236.667, 0)
 
+[node name="RayCast2D" type="RayCast2D" parent="Canon/BulletSpawnPoint"]
+target_position = Vector2(25000, 0)
+collision_mask = 31
+collide_with_areas = true
+
+[node name="BulletTrace" type="Line2D" parent="Canon/BulletSpawnPoint/RayCast2D"]
+visible = false
+points = PackedVector2Array(0, 0, 0, 0)
+width = 20.0
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("6_2shuy")
+
+[node name="Crosshair" type="Sprite2D" parent="Canon/BulletSpawnPoint/RayCast2D"]
+visible = false
+position = Vector2(123.333, 0)
+scale = Vector2(10, 10)
+texture = ExtResource("7_5ges6")
+region_enabled = true
+region_rect = Rect2(290, 242, 20, 20)
+script = ExtResource("7_sk5y0")
+
+[node name="MuzzleFire" type="AnimatedSprite2D" parent="."]
+visible = false
+scale = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_a5qjl")
+animation = &"muzzleFire"
+
+[node name="AnimationHandler" parent="." instance=ExtResource("7_wp5jp")]
+visible = false
+
 [node name="ShotTimer" type="Timer" parent="."]
 one_shot = true
 
@@ -174,17 +209,9 @@ attenuation = 2.54912
 visible = false
 position = Vector2(0, 0)
 
-[node name="AnimationHandler" parent="." instance=ExtResource("7_wp5jp")]
-visible = false
-
-[node name="MuzzleFire" type="AnimatedSprite2D" parent="."]
-visible = false
-scale = Vector2(10, 10)
-sprite_frames = SubResource("SpriteFrames_a5qjl")
-animation = &"muzzleFire"
-
 [connection signal="healthChange" from="." to="." method="_on_health_change"]
 [connection signal="playerDied" from="." to="." method="_on_player_died"]
+[connection signal="animation_finished" from="AnimationHandler" to="." method="_on_animation_handler_animation_finished"]
 [connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="HurtTimer" to="." method="_on_hurt_timer_timeout"]
@@ -197,4 +224,3 @@ animation = &"muzzleFire"
 [connection signal="timeout" from="MiniTimer" to="." method="_on_mini_timer_timeout"]
 [connection signal="timeout" from="UltiTimer" to="." method="_on_ulti_timer_timeout"]
 [connection signal="finished" from="Sound_Death" to="." method="_on_sound_death_finished"]
-[connection signal="animation_finished" from="AnimationHandler" to="." method="_on_animation_handler_animation_finished"]

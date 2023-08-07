@@ -17,8 +17,11 @@ var collider
 @export var persistanceTime:float			#Export time the bullet still persists on the map
 
 var isAlive = true							#variable to check if the bullet is persistant or not
+var canDamage = true
 var bounceAmount:int = 1
+
 var canPierce = false
+var pierceStorage = null
 
 var rocketTrailActive = false
 
@@ -40,15 +43,19 @@ func _process(delta):													#Act function of the engine that is called eve
 		handleRocketTrail()
 
 func _physics_process(delta):
-	velocity = Vector2(1,0).rotated(rotation) * shotSpeed * delta
-	collision = move_and_collide(velocity)								#moves the bullet and created a readable flag for the movement and collison, only use the collison though
-	#translate(velocity)												#move with translate instead, but use the same vector
-	if collision && not self.is_queued_for_deletion():
-		impactHandling()
+	if isAlive:
+		velocity = Vector2(1,0).rotated(rotation) * shotSpeed * delta
+		collision = move_and_collide(velocity)								#moves the bullet and created a readable flag for the movement and collison, only use the collison though
+		#translate(velocity)												#move with translate instead, but use the same vector
+		#If there´s a collision reported by move_and_collide and the bullet is not about to be deleted, commence the impact handling
+		if collision && not self.is_queued_for_deletion():
+			impactHandling()
+	else:
+		return
 	
 func reflect():																		#bounces the bullet on hit if bullet can bounce and surface is bouncy
 	if bounceAmount >= 1: 															#checks condiditions
-		var new_direction = velocity.bounce(collision.get_normal())					#storage for the new direction, that is equal to the colliders normal
+		var new_direction = velocity.bounce(collision.get_normal())					#storage for the new direction, that is equal to the colliders normal, using bounce (reflecting a vector)
 		rotation = new_direction.angle() #atan2(new_direction.y, new_direction.x)	#Flip the vector of the current rotation by using the arctanges of the new direction vector
 		bounceAmount -= 1														
 		shotSpeed *= 0.8
@@ -57,9 +64,9 @@ func reflect():																		#bounces the bullet on hit if bullet can bounce
 		var reflectPoof = load("res://Scenes/AnimationHandler.tscn").instantiate()
 		add_sibling(reflectPoof)														#Bullet is already instantiated as sibling to the tank on canvas layer, so create sibiling of this again
 		reflectPoof.show()
-		reflectPoof.set_scale(Vector2(1,1))
+		reflectPoof.set_scale(Vector2(1.5,1.5))
 		reflectPoof.position = position
-		reflectPoof.rotation = collision.get_normal().angle()							#Set the rotation to the angle of the normal of the collider we´re hitting
+		reflectPoof.rotation = collision.get_normal().angle() + 90								#Set the rotation to the angle of the normal of the collider we´re hitting
 		reflectPoof.play("impactDust")
 		await reflectPoof.animation_finished											#Wait for the animation to finish and delete the animator node after
 		reflectPoof.queue_free()
@@ -73,12 +80,14 @@ func impactHandling():
 	emit_signal('objectHit')
 	#update the collider after clearing the collision list to make ithe collider adressable
 	collider = collision.get_collider()
+	print(collider)
 	
-	#Player hit detection
-	if collider is Tank && collider.has_method("getDamaged"):			#listens to the area body hit, if it has the ability to get damaged
+	#Player hit detection - always damage tank on hit 
+	if collider is Tank and canDamage == true:			#listens to the area body hit, if it has the ability to get damaged and only execute if the one can damage flag is true
 		collider.getDamaged(shotPower)									#calls the damage function of the hit body and transmits the shotPower of the current bullet to deal the set amount of damage
+	
 	#Handle what the bullet does after
-	if not canPierce:													#If the bullet can pierce, don´t destroy it
+	if not canPierce and pierceStorage == null:							#If the bullet can pierce and storage has no value written to it
 		if bounceAmount <= 0:											#Explode only if bullet can no longer reflect
 			explode(collider)											#calls the explosion function to delete the bullet and show animation / effect based o nwhat it collides with
 		else:															#Otherwise bounce the bullet for as often at it can bounce (bounceAmount > 0) 
@@ -88,9 +97,10 @@ func impactHandling():
 			#if its anything else, like a wall, bounce
 			else:									
 				reflect()
-	else:																#if Bullet can pierce, don´t do anything to it and let it continue, but set the pierce to off
-		canPierce = false												#Disable piercing after piercing once										
-		#Somehow ignore the current collider until projectile no longer collides with it
+	else:																
+		#if Bullet can pierce, don´t do anything to it and let it continue
+		#the area2D will set the pierceStorage on entering a body or area and thus deactivate the instruction atop
+		return
 		
 	
 func explode(collider):													#handles the explosion animation on hit / death of the bullet
@@ -127,11 +137,45 @@ func _on_PersistanceTimer_timeout():		#deletes the bullet once its lifetime pers
 #func _on_body_entered(body):				#check collision for area2s bullet on a characterbody2d type object (Need this because player is c-body2d object) 
 #	impactHandling(body)
 
+#despawns the object when animation is finished or when the screen is exited
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
-
 func _on_animation_handler_animation_finished():
-	queue_free()							#despawns the object when animation is finished
+	queue_free()							
 
 
 
+#On entering any type of area or body, if the bullet can pierce store that object for comparison so it can be ingnored and disable collision the collison until exited
+func _on_area_2d_body_entered(body):
+	print(body, "body")
+	if canPierce:
+		pierceStorage = body
+		$CollisionShape2D.set_deferred("disabled", true)
+		$Area2D/CollisionShape2D.set_deferred("disabled", true)
+func _on_area_2d_area_entered(area):
+	print(area, "area")
+	if canPierce:
+		pierceStorage = area
+		$CollisionShape2D.set_deferred("disabled", true)
+		$Area2D/CollisionShape2D.set_deferred("disabled", true)
+
+#On exiting any type of area or body, disable the piercing if the bullet was able to pierce before. Always enable the collision after exiting a body and also clear the storage
+#Avoid the trigger all together if the bullet is about to be deleted
+func _on_area_2d_body_exited(body):
+	if not self.is_queued_for_deletion():
+		if canPierce:
+			canPierce = false
+		pierceStorage = null
+		$CollisionShape2D.set_deferred("disabled", false)
+		$Area2D/CollisionShape2D.set_deferred("disabled", false)
+	else:
+		return
+func _on_area_2d_area_exited(area):
+	if not self.is_queued_for_deletion():
+		if canPierce:
+			canPierce = false
+		pierceStorage = null
+		$CollisionShape2D.set_deferred("disabled", false)
+		$Area2D/CollisionShape2D.set_deferred("disabled", false)
+	else:
+		return

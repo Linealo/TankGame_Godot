@@ -1780,13 +1780,13 @@ offset_bottom = 1202.0
 [node name="PowerUp" parent="Game" instance=ExtResource("14_1kk0d")]
 position = Vector2(248, 531)
 scale = Vector2(1, 1)
-type = 14
+type = 9
 overwrite = true
 
 [node name="PowerUp2" parent="Game" instance=ExtResource("14_1kk0d")]
-position = Vector2(1643, 535)
+position = Vector2(1702, 535)
 scale = Vector2(1, 1)
-type = 14
+type = 9
 overwrite = true
 
 [node name="StartScreen" type="CanvasLayer" parent="."]

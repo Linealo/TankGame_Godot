@@ -307,9 +307,6 @@ region_rect = Rect2(531, 227, 12, 13)
 [node name="PoofAnimation" parent="." instance=ExtResource("3_f2gjf")]
 visible = false
 scale = Vector2(1, 1)
-animation = &"impactDust"
-frame = 5
-frame_progress = 1.0
 
 [node name="PickUpAnimation" parent="." instance=ExtResource("3_f2gjf")]
 visible = false
