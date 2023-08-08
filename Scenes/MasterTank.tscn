@@ -154,7 +154,6 @@ wait_time = 0.5
 one_shot = true
 
 [node name="InvincibilityTimer" type="Timer" parent="."]
-wait_time = 5.0
 one_shot = true
 
 [node name="SpeedUpTimer" type="Timer" parent="."]

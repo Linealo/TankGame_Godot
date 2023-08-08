@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://14cv0r3rvlje" path="res://Graphics/models/TankParts.png" id="4_w7cwq"]
 [ext_resource type="Texture2D" uid="uid://bufkakkvh61f1" path="res://Graphics/Effects/FireEffects/Fire Effect 1/Firebolt SpriteSheet.png" id="5_b0e14"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_61nk6"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7so8x"]
 size = Vector2(152, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w8xch"]
@@ -62,14 +62,8 @@ region_enabled = true
 region_rect = Rect2(2188, 961, 152, 40)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(76, 4.76837e-07)
-shape = SubResource("RectangleShape2D_61nk6")
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(76, 4.76837e-07)
-shape = SubResource("RectangleShape2D_61nk6")
+position = Vector2(76, 0)
+shape = SubResource("RectangleShape2D_7so8x")
 
 [node name="PersistanceTimer" type="Timer" parent="."]
 
@@ -88,7 +82,8 @@ autoplay = "fireExhaust"
 frame_progress = 0.900859
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(76, 4.76837e-07)
+visible = false
+position = Vector2(76, 0)
 scale = Vector2(7.6, 2)
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
@@ -96,9 +91,11 @@ target_position = Vector2(500, 0)
 collision_mask = 15
 collide_with_areas = true
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[node name="WallPierce" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.25
+one_shot = true
+
 [connection signal="animation_finished" from="AnimationHandler" to="." method="_on_animation_handler_animation_finished"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="WallPierce" to="." method="_on_wall_pierce_timeout"]

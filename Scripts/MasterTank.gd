@@ -309,8 +309,7 @@ func heal(amount):																#healing function
 func getDamaged(amount):														#Function to take damage. Will be checked and called on bullet impact (see MasterBullet _on_area_entered function)
 	print("Player was hit by bullet")
 	#play sound for being hit
-	if not $Sound_Hurt.is_playing():
-		$Sound_Hurt.play()
+	$Sound_Hurt.play()
 	#Prioritise the shield getting damaged before the player, even if invurnable
 	if shieldHP > 0:
 		print("but had a shield")

@@ -1724,6 +1724,7 @@ stream = ExtResource("3_iwlmt")
 [node name="Game" type="CanvasLayer" parent="."]
 
 [node name="TileMap" type="TileMap" parent="Game"]
+position = Vector2(-5, 0)
 scale = Vector2(0.85, 0.85)
 tile_set = SubResource("TileSet_h42d5")
 format = 2
