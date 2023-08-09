@@ -1781,13 +1781,13 @@ offset_bottom = 1202.0
 [node name="PowerUp" parent="Game" instance=ExtResource("14_1kk0d")]
 position = Vector2(248, 531)
 scale = Vector2(1, 1)
-type = 9
+type = 1
 overwrite = true
 
 [node name="PowerUp2" parent="Game" instance=ExtResource("14_1kk0d")]
 position = Vector2(1702, 535)
 scale = Vector2(1, 1)
-type = 9
+type = 1
 overwrite = true
 
 [node name="StartScreen" type="CanvasLayer" parent="."]
@@ -1827,7 +1827,6 @@ visible = false
 [node name="Shader" type="CanvasLayer" parent="."]
 
 [node name="CRT Shader" type="ColorRect" parent="Shader"]
-visible = false
 material = SubResource("ShaderMaterial_qfpui")
 offset_left = -122.0
 offset_top = -123.0

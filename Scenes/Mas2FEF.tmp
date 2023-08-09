@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://rs65ur780i7r"]
+[gd_scene load_steps=33 format=3 uid="uid://rs65ur780i7r"]
 
 [ext_resource type="Script" path="res://Scripts/MasterTank.gd" id="1_d6udm"]
 [ext_resource type="Texture2D" uid="uid://nc5m8611ei02" path="res://Graphics/models/TankTracksWideV2.png" id="2_1be7q"]
@@ -10,7 +10,6 @@
 [ext_resource type="AudioStream" uid="uid://bqhx1f46pbbkv" path="res://Sounds/Arcade_Death.wav" id="3_tklmg"]
 [ext_resource type="Script" path="res://Scripts/TankTracks.gd" id="3_tvlc4"]
 [ext_resource type="AudioStream" uid="uid://bl4r8m82yjax1" path="res://Sounds/Real_MetalKlank.wav" id="5_1wjfc"]
-[ext_resource type="Shader" path="res://Shader/HueCircling.gdshader" id="5_2hrtp"]
 [ext_resource type="Texture2D" uid="uid://b4tpdx52um5ec" path="res://Graphics/models/T_Grey_Wide.png" id="5_dfd83"]
 [ext_resource type="Script" path="res://Scripts/BulletTracer.gd" id="6_2shuy"]
 [ext_resource type="Texture2D" uid="uid://bk12ivopnueyd" path="res://Graphics/Collections/DuskIcons/Dusk_Icons_x24.png" id="7_5ges6"]
@@ -23,11 +22,6 @@
 [ext_resource type="Texture2D" uid="uid://b8gyam7sim1hm" path="res://Graphics/models/Shield/Shield_5.png" id="14_0algq"]
 [ext_resource type="Texture2D" uid="uid://be0folyca4kpq" path="res://Graphics/models/Shield/Shield_6.png" id="15_p58e6"]
 [ext_resource type="Texture2D" uid="uid://cyq8kfmag7or8" path="res://Graphics/models/Shield/Shield_7.png" id="16_ikq21"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ockoo"]
-resource_local_to_scene = true
-shader = ExtResource("5_2hrtp")
-shader_parameter/Shift_Hue = null
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gwn2y"]
 size = Vector2(403.333, 320)
@@ -115,7 +109,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Shield",
-"speed": 15.0
+"speed": 16.0
 }]
 
 [node name="MasterTank" type="CharacterBody2D"]
@@ -143,7 +137,6 @@ script = ExtResource("3_tvlc4")
 
 [node name="Body" type="Sprite2D" parent="."]
 z_index = 1
-material = SubResource("ShaderMaterial_ockoo")
 texture = ExtResource("5_dfd83")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -192,8 +185,7 @@ z_index = 1
 scale = Vector2(1.3, 1.3)
 sprite_frames = SubResource("SpriteFrames_mck0e")
 animation = &"Shield"
-autoplay = "Shield"
-frame_progress = 0.16931
+frame_progress = 0.608817
 flip_h = true
 
 [node name="AnimationHandler" parent="." instance=ExtResource("7_wp5jp")]
@@ -210,7 +202,6 @@ wait_time = 0.5
 one_shot = true
 
 [node name="InvincibilityTimer" type="Timer" parent="."]
-wait_time = 5.0
 one_shot = true
 
 [node name="SpeedUpTimer" type="Timer" parent="."]

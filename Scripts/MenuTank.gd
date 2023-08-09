@@ -1,11 +1,14 @@
-extends CharacterBody2D
+extends Tank
 
 @export var tankTexture: Array[Texture] = [								#preloading some textures that can also be changed in the export variables window
-	preload("res://Graphics/models/Tank1.png"),	#Pos 0:
-	preload("res://Graphics/models/Tank2.png"),	#Pos 1:
-	preload("res://Graphics/models/Tank3.png"),	#Pos 2:
-	preload("res://Graphics/models/Tank4.png"),	#Pos 3:
-	preload("res://Graphics/models/Tank5.png"),	#Pos 4:
+	preload("res://Graphics/models/T_Blue_Wide.png"),	#Pos 0:
+	preload("res://Graphics/models/T_Gold_Wide.png"),	#Pos 1:
+	preload("res://Graphics/models/T_Green_Wide.png"),	#Pos 2:
+	preload("res://Graphics/models/T_Grey_Wide.png"),	#Pos 3:
+	preload("res://Graphics/models/T_Purple_Wide.png"),	#Pos 4:
+	preload("res://Graphics/models/T_Red_Wide.png"),	#Pos 5:
+	preload("res://Graphics/models/T_Teal_Wide.png"),	#Pos 6:
+	preload("res://Graphics/models/T_Yellow_Wide.png"),	#Pos 7:
 	]
 
 var onScreen = false		#On-Screen Flag
@@ -13,7 +16,7 @@ var rngTex: int				#Creates a random number for texture array to load
 
 func _ready():
 	#When tank is spawned, decide a texture based on a random number calling textures from an Array
-	rngTex = randf_range(-1,5)
+	rngTex = randf_range(-1,tankTexture.size())
 	print(rngTex)
 	$Body.texture = tankTexture[rngTex]
 

@@ -8,6 +8,7 @@ extends CharacterBody2D
 signal tankShoots						#Reports a signal to the engine that the player called the shoot function
 signal healthChange						#Reports to the enginge if the health changes
 signal playerDied						#Reports to the engine the current state of being alive. Easier said: Reports to the game once the player dies
+signal shieldBreak
 
 #Exporting values so those can be accessed outside (equivalent to public variable)
 #Exporting Bullet Scene so every tank can be assigned own bullets easily
@@ -68,6 +69,8 @@ var shieldHP = 0
 var isMini = false
 var ultiMode = false
 
+var currentHue: int = 0
+
 func _ready():									#Constructor 
 	#pre-load resources
 	
@@ -87,6 +90,23 @@ func _ready():									#Constructor
 
 func _process(delta):
 	handleTankTracks()
+	
+	#Enable and disable the shield graphcis depending on if the shield is active or not
+	if shieldUp:
+		$Shield.show()
+	elif not shieldUp:
+		$Shield.hide()
+		
+	#Control invurnability visual effect through shader
+	if invincible:
+		currentHue += 5
+		if currentHue == 360:
+			currentHue = 0
+	elif not invincible:
+		currentHue = 0
+	$Body.material.set_shader_parameter("Shift_Hue", currentHue)
+	print($Body.material.get_shader_parameter("Shift_Hue"))
+	#print(currentHue)
 
 #Physics Process processes the games physics, i.e. movement, every frame
 func _physics_process(delta): 			#NOTE: Detla =>  time elapsed during a frame, used to control the display of movement based on frame time. IE 120 Pixel/sec movement with a delta of 60FPS (1/60), makes the player move 2px every frame or 120pixels every second
@@ -113,7 +133,7 @@ func control(delta):								#Control function that is called every frame. Contro
 		shoot()
 	#Dash
 	if Input.is_action_just_pressed(dashKey) && $DashTimer.is_stopped():
-		dash(delta)
+		#dash(delta)
 		$DashTimer.start()
 	
 func rotatePlayer(delta):
@@ -198,6 +218,7 @@ func shoot():									#Shooting function for all tanks
 		#play animation at muzzle location
 		$MuzzleFire.show()
 		$MuzzleFire.position = $Canon/BulletSpawnPoint.position
+		$MuzzleFire.set_scale(Vector2(1.3,1.3))
 		#$AnimationHandler.rotation = $Canon.global_rotation
 		$MuzzleFire.play("muzzleFire")
 		
@@ -279,14 +300,14 @@ func modifyBullets(b):
 		b.shotSpeed *= 1.5
 		b.rocketTrailActive = true
 		b.bounceAmount = 0
-		
+	#Return the bullet with all it´s added features
 	return b
 
 #Function to make the player dash	
-func dash(delta):
-	canDash = false
-	$DashTimer.start()
-	position += transform.x * moveSpeed * delta
+#func dash(delta):
+#	canDash = false
+#	$DashTimer.start()
+#	position += transform.x * moveSpeed * delta
 
 #Handle when the tank draws tracks with its particle emitter
 func handleTankTracks():	
@@ -320,6 +341,7 @@ func getDamaged(amount):														#Function to take damage. Will be checked 
 		if shieldHP < 1:								#If the shield is destroyed, set the shieled flag to false and shield HP to 0 (could be negative)
 			shieldUp = false
 			shieldHP = 0	
+			emit_signal("shieldBreak")
 		if damageOverflow > 0:
 			getDamaged(damageOverflow)						#recursive call to apply Overflow damage
 	elif invincible || ultiMode || cantBeHurt:			#if player is invincible of any kind, quit the current function execution
@@ -390,6 +412,7 @@ func _on_dash_timer_timeout():
 	
 func _on_invincibility_timer_timeout():
 	invincible = false
+	#print("invincibility deactivated")
 	
 func _on_speed_up_timer_timeout():
 	speedUp = false

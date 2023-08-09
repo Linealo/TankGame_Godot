@@ -96,6 +96,7 @@ func _on_PowerUp_body_entered(body):			#Signal that gets triggered on touch
 		Items.invincibility:
 			$Descriptor.text = "Invincible for 5s!"
 			body.invincible = true
+			body.get_node("InvincibilityTimer").start()
 		#If type = shield, then toggle flag to signal the shield being up and add 1 HP to the shield
 		Items.shield:
 			$Descriptor.text = "Shield +1!"
@@ -214,7 +215,7 @@ func _on_pick_up_sound_finished():					#remove powerup after sound has finished
 		queue_free()
 
 #Alternative Queue_Free that triggers if the death animation finishes
-func _on_death_animator_animation_finished(endOfLife):							#at death animation finish
+func _on_death_animator_animation_finished():									#at death animation finish
 	$CollisionShape2D.queue_free()												#always disable hitbox
 	$Sprite2DIcon.queue_free()													#always delete the Sprite
 	$Sprite2DShadow.queue_free()												#and its icons
