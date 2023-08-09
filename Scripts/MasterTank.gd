@@ -69,7 +69,7 @@ var shieldHP = 0
 var isMini = false
 var ultiMode = false
 
-var currentHue: int = 0
+var currentHue:float = 0
 
 func _ready():									#Constructor 
 	#pre-load resources
@@ -99,14 +99,13 @@ func _process(delta):
 		
 	#Control invurnability visual effect through shader
 	if invincible:
-		currentHue += 5
-		if currentHue == 360:
+		currentHue += 0.01
+		if currentHue == 1:
 			currentHue = 0
 	elif not invincible:
 		currentHue = 0
 	$Body.material.set_shader_parameter("Shift_Hue", currentHue)
 	print($Body.material.get_shader_parameter("Shift_Hue"))
-	#print(currentHue)
 
 #Physics Process processes the games physics, i.e. movement, every frame
 func _physics_process(delta): 			#NOTE: Detla =>  time elapsed during a frame, used to control the display of movement based on frame time. IE 120 Pixel/sec movement with a delta of 60FPS (1/60), makes the player move 2px every frame or 120pixels every second

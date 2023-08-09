@@ -27,7 +27,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ockoo"]
 resource_local_to_scene = true
 shader = ExtResource("5_2hrtp")
-shader_parameter/Shift_Hue = null
+shader_parameter/Shift_Hue = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gwn2y"]
 size = Vector2(403.333, 320)
