@@ -97,15 +97,14 @@ func _process(delta):
 	elif not shieldUp:
 		$Shield.hide()
 		
-	#Control invurnability visual effect through shader
+	#Control invurnability visual effect through shader / 0-1 being a full rotation in hue
 	if invincible:
-		currentHue += 0.01
+		currentHue += randf_range(0.0001, 0.01)   #number here controls hue rotation speed randomized for making it look less linear
 		if currentHue == 1:
 			currentHue = 0
 	elif not invincible:
 		currentHue = 0
 	$Body.material.set_shader_parameter("Shift_Hue", currentHue)
-	print($Body.material.get_shader_parameter("Shift_Hue"))
 
 #Physics Process processes the games physics, i.e. movement, every frame
 func _physics_process(delta): 			#NOTE: Detla =>  time elapsed during a frame, used to control the display of movement based on frame time. IE 120 Pixel/sec movement with a delta of 60FPS (1/60), makes the player move 2px every frame or 120pixels every second

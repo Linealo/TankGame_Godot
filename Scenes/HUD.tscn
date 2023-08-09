@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://cwnryqgu1h2dg"]
 
 [ext_resource type="Script" path="res://Scripts/HUD.gd" id="1_asb2u"]
-[ext_resource type="Texture2D" uid="uid://falugtntreqf" path="res://Graphics/models/Tank1.png" id="1_ihua5"]
+[ext_resource type="Texture2D" uid="uid://d25kroamvhqcn" path="res://Graphics/models/T_Green_Wide.png" id="2_jvdf0"]
 [ext_resource type="Texture2D" uid="uid://bw71ah1uauyym" path="res://Graphics/UI/PixelUI_Pack/Health_Separate/Health_3.png" id="3_j3hmb"]
-[ext_resource type="Texture2D" uid="uid://cp6pr3qwj1js8" path="res://Graphics/models/Tank2.png" id="4_kv5aw"]
+[ext_resource type="Texture2D" uid="uid://ccvfh3ekjxt1" path="res://Graphics/models/T_Red_Wide.png" id="4_4udy1"]
 
 [sub_resource type="Theme" id="Theme_aoid7"]
 
@@ -29,7 +29,7 @@ theme = SubResource("Theme_aoid7")
 
 [node name="P1_Icon" type="TextureRect" parent="P1_HUD"]
 layout_mode = 2
-texture = ExtResource("1_ihua5")
+texture = ExtResource("2_jvdf0")
 expand_mode = 3
 
 [node name="P1_Health" type="TextureRect" parent="P1_HUD"]
@@ -67,7 +67,7 @@ flip_h = true
 
 [node name="P2_Icon" type="TextureRect" parent="P2_HUD"]
 layout_mode = 2
-texture = ExtResource("4_kv5aw")
+texture = ExtResource("4_4udy1")
 expand_mode = 3
 flip_h = true
 
