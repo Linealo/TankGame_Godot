@@ -29,6 +29,7 @@ shader_parameter/Shift_Hue = 0.0
 size = Vector2(401, 320)
 
 [node name="MenuTank" instance=ExtResource("1_tcv3e")]
+z_index = 1
 position = Vector2(238, 181)
 scale = Vector2(1, 1)
 script = ExtResource("2_6u4sk")

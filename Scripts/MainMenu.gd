@@ -14,7 +14,7 @@ func _process(delta):
 		returnToMM()
 
 func _on_start_pressed():												#Signal listening to the Start Button being pressed
-	get_tree().change_scene_to_file("res://Scenes/Map_02.tscn")			#Get the node tree of this project and change to the game scene.
+	get_tree().change_scene_to_file("res://Scenes/World.tscn")			#Get the node tree of this project and change to the game scene.
 	#Will later instead make the cursor jump to a Game Settings Menu for Mode, Player, Map and Rule select
 
 func _on_options_pressed():												#Signal listening to the Options Button being pressed

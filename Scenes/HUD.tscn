@@ -29,6 +29,7 @@ script = ExtResource("1_asb2u")
 
 [node name="BG" type="Panel" parent="."]
 visible = false
+layout_mode = 0
 offset_left = -11.0
 offset_top = -159.0
 offset_right = 1959.0

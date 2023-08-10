@@ -19,7 +19,7 @@ func _process(delta):
 func spawnTank():
 	if ranNr1 == ranNr2:									#Spawn condition
 		var t = menuTank.instantiate()						#Create Tank
-		add_child(t)	#Add the Tank to the Background node to make it stick below the UI
+		add_child(t)										#Add the Tank to the Background node to make it stick below the UI
 		t.set_scale(Vector2(0.1, 0.1))						#Set its scale
 		t.position = $SpawnPath/PathFollow.position			#Set its spawn position
 		t.look_at(get_global_mouse_position())				#Set its spawn rotation 

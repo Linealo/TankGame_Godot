@@ -56,7 +56,6 @@ enum Items 	{					#enumeration list that assigns every PowerUp its own unique in
 	#same for 15, which only starts at 145 eventhough it could until 164 without overflowing into 17 at that point	
 @onready var rNr = snapped(randf_range(-5,154)/10, 1)	
 
-
 #Functions from here
 func _ready():												#when created execute the following
 	determineType()											#determine the type by using a random number generator

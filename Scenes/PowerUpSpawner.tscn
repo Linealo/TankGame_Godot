@@ -7,8 +7,6 @@
 [node name="PowerUpSpawner" type="Node2D"]
 script = ExtResource("1_80pvg")
 PowerUpCollection = ExtResource("2_j8jrx")
-spawnDelay = 5
-spawnChance = 100
 
 [node name="PlaceHolder" type="Sprite2D" parent="."]
 visible = false
