@@ -35,7 +35,6 @@ offset_bottom = 420.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5figv")
-metadata/_edit_lock_ = true
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_oiqly")
