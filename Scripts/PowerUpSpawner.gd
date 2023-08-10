@@ -45,34 +45,47 @@ func spawnPowerUp():
 		var powerUp = PowerUpCollection.instantiate()			#instantiate a new powerup
 		add_child(powerUp)										#add the powerup as a child to the spawner
 		powerUp.set_scale(Vector2(powerUpScale,powerUpScale))	#Force default scale on creation - Can be altered later elsewhere by calling upon powerUpSpawner.PowerUpScale
-		chooseSpawnPosition()
+		chooseSpawnPosition()									#choose a random spawn Position
 		powerUp.global_position = chosenSpawnPosition			#Place the child at the randomized position
-		#powerUp.global_position = Vector2(randf_range(200, VPW - 200),randf_range(200, VPH - 200))
+		#powerUp.global_position = Vector2(randf_range(200, VPW - 200),randf_range(200, VPH - 200)) #OLD version with viewport coordinates
 		$SpawnDelay.start()										#restart the delay timer
 
 func chooseSpawnPosition():
-	#Chooses a spawnposition on random from the list of possible spawnLocations
-	chosenSpawnPositionIndex = randf_range(0, spawnPositions.size())			#First creates a random int within the length of the positions array
-	chosenSpawnPosition = spawnPositions[chosenSpawnPositionIndex]				#then uses that index to get a Vector2 out of the possible locations Array
-	blackListCheck()
-
-#Check the blaclist
-func blackListCheck():
-	for pos in posBlacklist:					#Go through it
-		if chosenSpawnPositionIndex == pos:		#If the chosen position is in it
-			chooseSpawnPosition()				#reroll the position selection
-			return								#and return without further action
-	blackListUpdate()							#if the check returned without hitting true, update the blacklist
-
-#Update the blackList accordingly
-func blackListUpdate():
-	#if the blacklist is larger than the possible amount of positions -5 items, remove the oldest and add the new one
+	#Shorter version - RAM optimised 
+	chosenSpawnPosition = spawnPositions[randi() % spawnPositions.size()]
+	while chosenSpawnPosition in posBlacklist:
+		chosenSpawnPosition = spawnPositions[randi() % spawnPositions.size()]
+	
 	if posBlacklist.size() >= (spawnPositions.size() - 5):
 		posBlacklist.pop_front()
-		posBlacklist.append(chosenSpawnPositionIndex)
-	#otherwise just add the chosen position
-	else:
-		posBlacklist.append(chosenSpawnPositionIndex)
+	posBlacklist.append(chosenSpawnPosition)
+	
+	return chosenSpawnPosition
+
+#Old blaclist checking and randomisation
+	#Chooses a spawnposition on random from the list of possible spawnLocations
+#	chosenSpawnPositionIndex = randf_range(0, spawnPositions.size())			#First creates a random int within the length of the positions array
+#	chosenSpawnPosition = spawnPositions[chosenSpawnPositionIndex]				#then uses that index to get a Vector2 out of the possible locations Array
+#	blackListCheck()
+
+
+##Check the blaclist
+#func blackListCheck():
+#	for pos in posBlacklist:					#Go through it
+#		if chosenSpawnPositionIndex == pos:		#If the chosen position is in it
+#			chooseSpawnPosition()				#reroll the position selection
+#			return								#and return without further action
+#	blackListUpdate()							#if the check returned without hitting true, update the blacklist
+#
+##Update the blackList accordingly
+#func blackListUpdate():
+#	#if the blacklist is larger than the possible amount of positions -5 items, remove the oldest and add the new one
+#	if posBlacklist.size() >= (spawnPositions.size() - 5):
+#		posBlacklist.pop_front()
+#		posBlacklist.append(chosenSpawnPositionIndex)
+#	#otherwise just add the chosen position
+#	else:
+#		posBlacklist.append(chosenSpawnPositionIndex)
 
 func _on_world_map_loaded():
 	spawnPositions = get_parent().get_node("WorldMap").markerPositions

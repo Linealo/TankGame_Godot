@@ -45,11 +45,12 @@ func _process(delta):						#Act function of the engine that is called every fram
 	
 	if rocketTrailActive:
 		handleRocketTrail()
-	
-	if canPierce:
-		modulate = Color(255,0,0)
-	else:
-		modulate = Color(0,255,0)
+
+#Modulate to check pierce state - DEBUG	
+#	if canPierce:
+#		modulate = Color(255,0,0)
+#	else:
+#		modulate = Color(0,255,0)
 	
 
 func _physics_process(delta):

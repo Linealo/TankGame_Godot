@@ -62,9 +62,6 @@ safe_margin = 0.08
 
 [node name="PowerUpSpawner" parent="Game" instance=ExtResource("7_7rd6g")]
 position = Vector2(916, 549)
-spawnDelay = 1
-spawnChance = 1
-powerUpScale = 1
 
 [node name="HUD" parent="Game" instance=ExtResource("8_ylj7l")]
 offset_top = 1202.0
