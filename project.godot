@@ -160,6 +160,7 @@ Back={
 2d_physics/layer_3="enemies"
 2d_physics/layer_4="projectiles"
 2d_physics/layer_5="PowerUps"
+2d_physics/layer_6="KystInseln"
 
 [rendering]
 
