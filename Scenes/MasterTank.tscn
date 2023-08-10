@@ -121,7 +121,7 @@ animations = [{
 [node name="MasterTank" type="CharacterBody2D"]
 scale = Vector2(0.3, 0.3)
 collision_layer = 2
-collision_mask = 31
+collision_mask = 63
 safe_margin = 0.001
 script = ExtResource("1_d6udm")
 rotationSpeed = 5.0
