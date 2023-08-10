@@ -1,9 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwnryqgu1h2dg"]
+[gd_scene load_steps=21 format=3 uid="uid://cwnryqgu1h2dg"]
 
 [ext_resource type="Script" path="res://Scripts/HUD.gd" id="1_asb2u"]
 [ext_resource type="Texture2D" uid="uid://d25kroamvhqcn" path="res://Graphics/models/T_Green_Wide.png" id="2_jvdf0"]
 [ext_resource type="Texture2D" uid="uid://bw71ah1uauyym" path="res://Graphics/UI/PixelUI_Pack/Health_Separate/Health_3.png" id="3_j3hmb"]
 [ext_resource type="Texture2D" uid="uid://ccvfh3ekjxt1" path="res://Graphics/models/T_Red_Wide.png" id="4_4udy1"]
+[ext_resource type="Texture2D" uid="uid://dk6lgcx7vi1x8" path="res://Graphics/Collections/PixelLoot/Seperate/tile073.png" id="4_iajvg"]
+[ext_resource type="Texture2D" uid="uid://d0uye7kky7oo6" path="res://Graphics/Collections/PixelLoot/Seperate/tile069.png" id="5_utvtu"]
+[ext_resource type="Texture2D" uid="uid://cf30soykdhx5c" path="res://Graphics/Collections/PixelLoot/Seperate/tile443.png" id="6_4f2wy"]
+[ext_resource type="Texture2D" uid="uid://ivvapelfs1gd" path="res://Graphics/Collections/PixelLoot/Seperate/tile447.png" id="7_7bkpy"]
+[ext_resource type="Texture2D" uid="uid://q6gmhijrcsbr" path="res://Graphics/Collections/PixelLoot/Seperate/tile188.png" id="8_krdhv"]
+[ext_resource type="Texture2D" uid="uid://cbwutddislkvu" path="res://Graphics/Collections/PixelLoot/Seperate/tile180.png" id="9_ncvd6"]
+[ext_resource type="Texture2D" uid="uid://4lopbmp8om2e" path="res://Graphics/Collections/PixelLoot/Seperate/tile155.png" id="10_a8hw8"]
+[ext_resource type="Texture2D" uid="uid://cs78euno8kpbq" path="res://Graphics/Collections/PixelLoot/Seperate/tile110.png" id="11_tlrb5"]
+[ext_resource type="Texture2D" uid="uid://c2361n013akn2" path="res://Graphics/Collections/PixelLoot/Seperate/tile132.png" id="12_i2o8j"]
+[ext_resource type="Texture2D" uid="uid://l64c3r1gul55" path="res://Graphics/Collections/PixelLoot/Seperate/tile179.png" id="13_gpn26"]
+[ext_resource type="Texture2D" uid="uid://cr0wtv6ejo2ix" path="res://Graphics/Collections/PixelLoot/Seperate/tile166.png" id="14_kwsfw"]
+[ext_resource type="Texture2D" uid="uid://b5nl48wdbs3tw" path="res://Graphics/Collections/PixelLoot/Seperate/tile159.png" id="15_7vknp"]
+[ext_resource type="Texture2D" uid="uid://bxpruunod67xp" path="res://Graphics/Collections/PixelLoot/Seperate/tile498.png" id="16_efpww"]
+[ext_resource type="Texture2D" uid="uid://bb8psts2wd16j" path="res://Graphics/Collections/PixelLoot/Seperate/tile302.png" id="17_fyx3e"]
+[ext_resource type="Texture2D" uid="uid://ctdeslbhgbiw" path="res://Graphics/Collections/PixelLoot/Seperate/tile227.png" id="18_0kcp5"]
 
 [sub_resource type="Theme" id="Theme_aoid7"]
 
@@ -11,6 +26,13 @@
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_asb2u")
+
+[node name="BG" type="Panel" parent="."]
+visible = false
+offset_left = -11.0
+offset_top = -159.0
+offset_right = 1959.0
+offset_bottom = 10.0
 
 [node name="P1_HUD" type="HBoxContainer" parent="."]
 layout_direction = 2
@@ -39,10 +61,85 @@ expand_mode = 3
 
 [node name="P1_Inv" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 502.5
-offset_top = 1108.0
-offset_right = 502.5
-offset_bottom = 1165.0
+offset_left = 8.0
+offset_top = -139.0
+offset_right = 619.0
+offset_bottom = -102.0
+
+[node name="P1_Invincible" type="TextureRect" parent="P1_Inv"]
+layout_mode = 2
+texture = ExtResource("4_iajvg")
+expand_mode = 2
+
+[node name="P1_Shield" type="TextureRect" parent="P1_Inv"]
+layout_mode = 2
+texture = ExtResource("5_utvtu")
+expand_mode = 2
+
+[node name="P1_SpeedUp" type="TextureRect" parent="P1_Inv"]
+layout_mode = 2
+texture = ExtResource("6_4f2wy")
+expand_mode = 2
+
+[node name="P1_SlowDown" type="TextureRect" parent="P1_Inv"]
+layout_mode = 2
+texture = ExtResource("7_7bkpy")
+expand_mode = 2
+
+[node name="P1_Freeze" type="TextureRect" parent="P1_Inv"]
+layout_mode = 2
+texture = ExtResource("8_krdhv")
+expand_mode = 2
+
+[node name="P1_Reverse" type="TextureRect" parent="P1_Inv"]
+layout_mode = 2
+texture = ExtResource("9_ncvd6")
+expand_mode = 2
+
+[node name="P1_Rocket" type="TextureRect" parent="P1_Inv"]
+layout_mode = 2
+texture = ExtResource("10_a8hw8")
+expand_mode = 2
+
+[node name="P1_Wide" type="TextureRect" parent="P1_Inv"]
+layout_mode = 2
+texture = ExtResource("11_tlrb5")
+expand_mode = 2
+
+[node name="P1_Piercing" type="TextureRect" parent="P1_Inv"]
+layout_mode = 2
+texture = ExtResource("12_i2o8j")
+expand_mode = 2
+
+[node name="P1_Triple" type="TextureRect" parent="P1_Inv"]
+layout_mode = 2
+texture = ExtResource("13_gpn26")
+expand_mode = 2
+
+[node name="P1_Grenade" type="TextureRect" parent="P1_Inv"]
+layout_mode = 2
+texture = ExtResource("14_kwsfw")
+expand_mode = 2
+
+[node name="P1_Bouncy" type="TextureRect" parent="P1_Inv"]
+layout_mode = 2
+texture = ExtResource("16_efpww")
+expand_mode = 2
+
+[node name="P1_RapidFire" type="TextureRect" parent="P1_Inv"]
+layout_mode = 2
+texture = ExtResource("15_7vknp")
+expand_mode = 2
+
+[node name="P1_Mini" type="TextureRect" parent="P1_Inv"]
+layout_mode = 2
+texture = ExtResource("17_fyx3e")
+expand_mode = 2
+
+[node name="P1_Ultimate" type="TextureRect" parent="P1_Inv"]
+layout_mode = 2
+texture = ExtResource("18_0kcp5")
+expand_mode = 2
 
 [node name="P2_HUD" type="HBoxContainer" parent="."]
 layout_direction = 2
@@ -73,7 +170,83 @@ flip_h = true
 
 [node name="P2_Inv" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 1947.5
-offset_top = 1107.0
-offset_right = 1947.5
-offset_bottom = 1164.0
+offset_left = 1226.0
+offset_top = -139.0
+offset_right = 1937.0
+offset_bottom = -102.0
+alignment = 2
+
+[node name="P2_Ultimate" type="TextureRect" parent="P2_Inv"]
+layout_mode = 2
+texture = ExtResource("18_0kcp5")
+expand_mode = 2
+
+[node name="P2_Mini" type="TextureRect" parent="P2_Inv"]
+layout_mode = 2
+texture = ExtResource("17_fyx3e")
+expand_mode = 2
+
+[node name="P2_RapidFire" type="TextureRect" parent="P2_Inv"]
+layout_mode = 2
+texture = ExtResource("15_7vknp")
+expand_mode = 2
+
+[node name="P2_Bouncy" type="TextureRect" parent="P2_Inv"]
+layout_mode = 2
+texture = ExtResource("16_efpww")
+expand_mode = 2
+
+[node name="P2_Grenade" type="TextureRect" parent="P2_Inv"]
+layout_mode = 2
+texture = ExtResource("14_kwsfw")
+expand_mode = 2
+
+[node name="P2_Triple" type="TextureRect" parent="P2_Inv"]
+layout_mode = 2
+texture = ExtResource("13_gpn26")
+expand_mode = 2
+
+[node name="P2_Piercing" type="TextureRect" parent="P2_Inv"]
+layout_mode = 2
+texture = ExtResource("12_i2o8j")
+expand_mode = 2
+
+[node name="P2_Wide" type="TextureRect" parent="P2_Inv"]
+layout_mode = 2
+texture = ExtResource("11_tlrb5")
+expand_mode = 2
+
+[node name="P2_Rocket" type="TextureRect" parent="P2_Inv"]
+layout_mode = 2
+texture = ExtResource("10_a8hw8")
+expand_mode = 2
+
+[node name="P2_Reverse" type="TextureRect" parent="P2_Inv"]
+layout_mode = 2
+texture = ExtResource("9_ncvd6")
+expand_mode = 2
+
+[node name="P2_Freeze" type="TextureRect" parent="P2_Inv"]
+layout_mode = 2
+texture = ExtResource("8_krdhv")
+expand_mode = 2
+
+[node name="P2_SlowDown" type="TextureRect" parent="P2_Inv"]
+layout_mode = 2
+texture = ExtResource("7_7bkpy")
+expand_mode = 2
+
+[node name="P2_SpeedUp" type="TextureRect" parent="P2_Inv"]
+layout_mode = 2
+texture = ExtResource("6_4f2wy")
+expand_mode = 2
+
+[node name="P2_Shield" type="TextureRect" parent="P2_Inv"]
+layout_mode = 2
+texture = ExtResource("5_utvtu")
+expand_mode = 2
+
+[node name="P2_Invincible" type="TextureRect" parent="P2_Inv"]
+layout_mode = 2
+texture = ExtResource("4_iajvg")
+expand_mode = 2

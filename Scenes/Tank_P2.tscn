@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://t84dudbhvqpm"]
+[gd_scene load_steps=9 format=3 uid="uid://t84dudbhvqpm"]
 
 [ext_resource type="PackedScene" uid="uid://rs65ur780i7r" path="res://Scenes/MasterTank.tscn" id="1_ettkx"]
 [ext_resource type="Script" path="res://Scripts/Tank_P2.gd" id="2_h54ft"]
 [ext_resource type="PackedScene" uid="uid://bmntaqe52u4v4" path="res://Scenes/Bullet_P2.tscn" id="3_dsa5a"]
+[ext_resource type="Shader" path="res://Shader/HueCircling.gdshader" id="4_cquq4"]
 [ext_resource type="Texture2D" uid="uid://ccvfh3ekjxt1" path="res://Graphics/models/T_Red_Wide.png" id="4_v4ses"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x63gh"]
@@ -11,6 +12,11 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.1
 scale_max = 0.1
 color = Color(1, 1, 1, 0.556863)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r20yv"]
+resource_local_to_scene = true
+shader = ExtResource("4_cquq4")
+shader_parameter/Shift_Hue = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yj444"]
 size = Vector2(401, 319)
@@ -31,6 +37,7 @@ metadata/_edit_group_ = true
 process_material = SubResource("ParticleProcessMaterial_x63gh")
 
 [node name="Body" parent="." index="1"]
+material = SubResource("ShaderMaterial_r20yv")
 texture = ExtResource("4_v4ses")
 region_rect = Rect2(515, 388, 400, 361)
 

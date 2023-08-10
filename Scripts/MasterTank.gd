@@ -105,7 +105,7 @@ func _process(delta):
 	elif not invincible:
 		currentHue = 0
 	$Body.material.set_shader_parameter("Shift_Hue", currentHue)
-
+	
 #Physics Process processes the games physics, i.e. movement, every frame
 func _physics_process(delta): 			#NOTE: Detla =>  time elapsed during a frame, used to control the display of movement based on frame time. IE 120 Pixel/sec movement with a delta of 60FPS (1/60), makes the player move 2px every frame or 120pixels every second
 	if not isAlive:						#if not alive, skip this function and thus don´t call the movement and action functions

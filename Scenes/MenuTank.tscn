@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://io5wda562yoa"]
+[gd_scene load_steps=16 format=3 uid="uid://io5wda562yoa"]
 
 [ext_resource type="PackedScene" uid="uid://rs65ur780i7r" path="res://Scenes/MasterTank.tscn" id="1_tcv3e"]
 [ext_resource type="Script" path="res://Scripts/MenuTank.gd" id="2_6u4sk"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://ccvfh3ekjxt1" path="res://Graphics/models/T_Red_Wide.png" id="8_m2if8"]
 [ext_resource type="Texture2D" uid="uid://crkhqt4vrw5l6" path="res://Graphics/models/T_Teal_Wide.png" id="9_la8to"]
 [ext_resource type="Texture2D" uid="uid://l6fuke78nwok" path="res://Graphics/models/T_Yellow_Wide.png" id="10_5p5ur"]
+[ext_resource type="Shader" path="res://Shader/HueCircling.gdshader" id="11_2g70f"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yumlp"]
 resource_local_to_scene = true
@@ -18,6 +19,11 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.1
 scale_max = 0.1
 color = Color(1, 1, 1, 0.556863)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fa5hu"]
+resource_local_to_scene = true
+shader = ExtResource("11_2g70f")
+shader_parameter/Shift_Hue = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pxigo"]
 size = Vector2(401, 320)
@@ -38,6 +44,7 @@ metadata/_edit_group_ = true
 process_material = SubResource("ParticleProcessMaterial_yumlp")
 
 [node name="Body" parent="." index="1"]
+material = SubResource("ShaderMaterial_fa5hu")
 region_rect = Rect2(1031, 0, 476, 361)
 
 [node name="CollisionShape2D" parent="." index="2"]
