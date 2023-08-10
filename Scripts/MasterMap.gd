@@ -8,23 +8,25 @@ extends Node2D
 
 #Map selector settings - enable randomisation or turn it off
 @export var randomiseMap = false						#Toggle for randomisation
-@onready var RNGMapNr: int = randf_range(0,2) 			#Storage for random number within the list of Maps
+var RNGMapNr:int  								#Storage for random number within the array of Maps
 
 enum Maps {												#List of maps
 	Forest,			#0
 	City,			#1
 	Beach,			#2
 }
-@export var selectedMap : Maps							#Map selector for inspector if one wants to overwrite
-@export var mapScene: Array[PackedScene] = [			#Add Maps in here or through inspector
+@export var selectedMap: Maps							#Map selector for inspector if one wants to overwrite
+@export var mapScenes: Array[PackedScene] = [			#Add Maps in here or through inspector
 	preload("res://Scenes/Map_Forest.tscn"),			#Map 0 - Forest
-	
+	preload("res://Scenes/Map_City.tscn")				#Map 1 - City
 ]
 signal MapLoaded
 
-func _ready():
+func _ready():	
 	print("Game started")
-	selectMap()
+	
+	RNGMapNr = randi() % mapScenes.size()				#create a random number within the index length of the mapScenes array
+	selectMap() #And place players
 	
 	#Ready variable to decide if the start screen before the game should show or not
 	if enableStartScreen:
@@ -32,6 +34,7 @@ func _ready():
 	else:
 		$StartScreen.queue_free()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)			#Hide the cursour during gameplay
+	
 		
 ##Map Selector	
 #The selected map will be added as a child of the $Game CanvasLayer and have the name "WorldMap"
@@ -39,16 +42,39 @@ func _ready():
 func selectMap():
 	#If no randomisation is enabled, instantiate a map with the chosen enum position as the index of the map list array
 	if not randomiseMap:
-		var WorldMap = mapScene[selectedMap].instantiate()
+		var WorldMap = mapScenes[selectedMap].instantiate()
 		get_node("Game").add_child(WorldMap)
 		get_node("Game").move_child(WorldMap, 0)								#move the child to the right render posiition
 	#If randomisation is enabled, instantiate a map with a ranodm inced
 	if randomiseMap:
-		var WorldMap = mapScene[RNGMapNr].instantiate()
+		#If RNG is enabled, the selectedMap carrying the index for the array, will be overwritten by the random number
+		selectedMap = RNGMapNr					
+		var WorldMap = mapScenes[RNGMapNr].instantiate()
 		get_node("Game").add_child(WorldMap)
 		get_node("Game").move_child(WorldMap, 0)
 	emit_signal("MapLoaded")
+	#Asjut players to map - only execute after Map has been loaded, thus positioned here
+	placePlayers()
 	
+##Places players and handles their features for this round
+func placePlayers():	
+	#Get the starting positions and rotations from the maps and place the players there 
+	$Game/Tank_P1.global_position = $Game/WorldMap/P1_Start.global_position
+	$Game/Tank_P1.rotation = $Game/WorldMap/P1_Start.rotation
+	$Game/Tank_P2.global_position = $Game/WorldMap/P2_Start.global_position
+	$Game/Tank_P2.rotation = $Game/WorldMap/P2_Start.rotation
+
+	#Map specific changes
+	if selectedMap == 1: #On the chity map
+		$Game/Tank_P1.set_scale(Vector2(0.07,0.07))
+		$Game/Tank_P1.moveSpeed = 180
+		$Game/Tank_P1.bulletSpeed = 600
+		$Game/Tank_P2.set_scale(Vector2(0.07,0.07))
+		$Game/Tank_P2.moveSpeed = 180
+		$Game/Tank_P2.bulletSpeed = 600
+		$Game/PowerUpSpawner.powerUpScale = 0.7
+
+##Handles the potential start screen that could show up at the beginning of a game. Includes a countdown
 func handleStartScreen():
 	#Show the Start Screen based on the pause screen overaly
 	$StartScreen.show()

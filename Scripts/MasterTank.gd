@@ -17,12 +17,13 @@ signal shieldBreak
 
 #Export important values that can be set per tank easily
 @export_category("Stats")
-@export var moveSpeed: float			#Export the movespeed to be accessible i.e. by PowerUps
-@export var rotationSpeed: float		#Export the rotationspeed to be accessible i.e. by PowerUps
-@export var shotDelay: float			#Export the shotdelay to be accessible i.e. by PowerUps
-@export var startHealth: int			#Export the health value to allow the game to set a starting health on spawn
-@export var dashDelay: float			#Export the current dashDelay to be accessible i.e. by PowerUps and instances
-@export var bulletDamage: int = 1		#Export the damage this tanks bullets will do
+@export var moveSpeed:float	= 200		#Export the movespeed to be accessible i.e. by PowerUps
+@export var rotationSpeed:float			#Export the rotationspeed to be accessible i.e. by PowerUps
+@export var shotDelay:float				#Export the shotdelay to be accessible i.e. by PowerUps
+@export var startHealth:int				#Export the health value to allow the game to set a starting health on spawn
+@export var dashDelay:float				#Export the current dashDelay to be accessible i.e. by PowerUps and instances
+@export var bulletDamage:int = 1		#Export the damage this tanks bullets will do
+@export var bulletSpeed:int = 800
 
 #Export control scheme so tank controls don´t need to be double in the tank scripts themselves. Replace "x" with withe players number
 @export_category("ControlKeys")
@@ -90,6 +91,12 @@ func _ready():									#Constructor
 
 func _process(delta):
 	handleTankTracks()
+	
+	#Refresh speed parameters every frame to get consistent appliance of them
+	maxSpeed = moveSpeed
+	maxNegSpeed = moveSpeed * -1 * 0.66
+	acceleration = moveSpeed * 1
+	friction = moveSpeed * 3
 	
 	#Enable and disable the shield graphcis depending on if the shield is active or not
 	if shieldUp:
@@ -261,6 +268,8 @@ func createBullet():
 #Modifiers from the powerUps
 func modifyBullets(b):
 	#If the player is small, scale up the bullets back to normal
+	b.shotSpeed = bulletSpeed
+	
 	if isMini:
 		b.apply_scale(Vector2(2,2))
 		#b.shotSpeed *= 1.5

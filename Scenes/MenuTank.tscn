@@ -34,7 +34,6 @@ position = Vector2(238, 181)
 scale = Vector2(1, 1)
 script = ExtResource("2_6u4sk")
 tankTexture = Array[Texture]([ExtResource("3_nrrik"), ExtResource("4_mcb8l"), ExtResource("5_tjr8j"), ExtResource("6_cwpvu"), ExtResource("7_8f7gr"), ExtResource("8_m2if8"), ExtResource("9_la8to"), ExtResource("10_5p5ur")])
-moveSpeed = 0.0
 rotationSpeed = 0.0
 shotDelay = 0.0
 startHealth = 0

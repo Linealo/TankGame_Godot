@@ -124,7 +124,6 @@ collision_layer = 2
 collision_mask = 31
 safe_margin = 0.001
 script = ExtResource("1_d6udm")
-moveSpeed = 200.0
 rotationSpeed = 5.0
 shotDelay = 2.0
 startHealth = 3

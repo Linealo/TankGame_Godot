@@ -23,8 +23,11 @@
 [sub_resource type="Theme" id="Theme_aoid7"]
 
 [node name="HUD" type="Control"]
+top_level = true
 layout_mode = 3
 anchors_preset = 0
+offset_top = 4.0
+offset_bottom = 4.0
 script = ExtResource("1_asb2u")
 
 [node name="BG" type="Panel" parent="."]
@@ -41,9 +44,9 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 6.0
+offset_left = 4.0
 offset_top = -92.0
-offset_right = 333.0
+offset_right = 331.0
 offset_bottom = -35.0
 grow_vertical = 0
 scale = Vector2(1.5, 1.5)
@@ -62,10 +65,10 @@ expand_mode = 3
 
 [node name="P1_Inv" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 8.0
-offset_top = -139.0
-offset_right = 619.0
-offset_bottom = -102.0
+offset_left = 6.0
+offset_top = -132.0
+offset_right = 617.0
+offset_bottom = -95.0
 
 [node name="P1_Invincible" type="TextureRect" parent="P1_Inv"]
 layout_mode = 2
@@ -148,9 +151,9 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 1451.0
+offset_left = 1455.0
 offset_top = -93.0
-offset_right = 1778.0
+offset_right = 1782.0
 offset_bottom = -36.0
 grow_vertical = 0
 scale = Vector2(1.5, 1.5)
@@ -171,10 +174,10 @@ flip_h = true
 
 [node name="P2_Inv" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 1226.0
-offset_top = -139.0
-offset_right = 1937.0
-offset_bottom = -102.0
+offset_left = 1230.0
+offset_top = -132.0
+offset_right = 1941.0
+offset_bottom = -95.0
 alignment = 2
 
 [node name="P2_Ultimate" type="TextureRect" parent="P2_Inv"]
