@@ -162,7 +162,7 @@ func temporaryCollisionCheck():
 
 func handleRocketTrail():
 	var trail = rocketTrailScene.instantiate() as GPUParticles2D
-	get_parent().add_child(trail)
+	add_child(trail)
 	trail.rotation = $Sprite2D.global_rotation
 	trail.position = $Sprite2D.global_position
 

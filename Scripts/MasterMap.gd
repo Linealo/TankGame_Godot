@@ -4,8 +4,8 @@ extends Node2D
 #@onready var tank_p2 = preload("res://Scenes/Tank_P2.tscn")
 #@onready var tank_p3 = preload("res://Tanks/Tank_P3.tscn")
 #@onready var tank_p4 = preload("res://Tanks/Tank_P4.tscn")
-@onready var P1 = $Tank_P1
-@onready var P2 = $Tank_P2
+@onready var P1 = $Game/Tank_P1
+@onready var P2 = $Game/Tank_P2
 #var P3
 #var P4
 @export var enableStartScreen = false
@@ -18,12 +18,14 @@ enum Maps {												#List of maps
 	Forest,			#0
 	City,			#1
 	Dungeon,		#2
+	Kyst,			#3
 }
 @export var selectedMap: Maps							#Map selector for inspector if one wants to overwrite
 @export var mapScenes: Array[PackedScene] = [			#Add Maps in here or through inspector
 	preload("res://Scenes/Map_Forest.tscn"),			#Map 0 - Forest - Classic Battle Map
 	preload("res://Scenes/Map_City.tscn"),				#Map 1 - City - Big field, small passages
 	preload("res://Scenes/Map_Dungeon.tscn"),			#Map 2 - Dungeon - Welcome to the dark
+	preload("res://Scenes/Map_Kyst.tscn")				#Map 3 - Coastal - Open fire and few places to hide
 ]
 signal MapLoaded
 
@@ -78,10 +80,22 @@ func placePlayers():
 		$Game/Tank_P2.moveSpeed = 180
 		$Game/Tank_P2.bulletSpeed = 600
 		$Game/PowerUpSpawner.powerUpScale = 0.7
-	if selectedMap == 2:
-		$Game/DungeonDark.show()
+		
+	if selectedMap == 2: #Dungeon Map
+		$Game/Tank_P1/DungeonLight.show()
+		$Game/Tank_P2/DungeonLight.show()
+		$Game/PowerUpSpawner.spawnDelay = 10
+		$Game/PowerUpSpawner.spawnChance = 500
 	else:
-		$Game/DungeonDark.hide()
+		$Game/Tank_P1/DungeonLight.hide()
+		$Game/Tank_P2/DungeonLight.hide()
+		
+	if selectedMap == 3:
+		$Game/Tank_P1.moveSpeed = 180
+		$Game/Tank_P1.set_scale(Vector2(0.07,0.07))
+		$Game/Tank_P2.moveSpeed = 180
+		$Game/Tank_P2.set_scale(Vector2(0.07,0.07))
+		$Game/PowerUpSpawner.powerUpScale = 0.7
 
 ##Handles the potential start screen that could show up at the beginning of a game. Includes a countdown
 func handleStartScreen():

@@ -65,12 +65,6 @@ size = Vector2(401, 320)
 scale = Vector2(1, 1)
 script = ExtResource("3_ly5j2")
 bullet = ExtResource("3_jy53m")
-fwKey = "P1_Forward"
-bwKey = "P1_Backward"
-rtlKey = "P1_RotateLeft"
-rtrKey = "P1_RotateRight"
-shootKey = "P1_Shoot"
-dashKey = "P1_Dash"
 metadata/_edit_group_ = true
 
 [node name="TankTracks" parent="." index="0"]

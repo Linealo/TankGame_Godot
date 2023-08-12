@@ -1,5 +1,7 @@
 extends Area2D
 
+var isAlive = true
+
 #Enum for further use
 enum Items 	{					#enumeration list that assigns every PowerUp its own unique integer
 			heal,				#0
@@ -63,13 +65,18 @@ func _ready():												#when created execute the following
 	$LifetimeTimer.set_wait_time(lifetime)					#set up the lifetime in the timer
 	if $LifetimeTimer.is_stopped() && $LifetimeTimer.get_wait_time() > 0:			#if the timer on startup is stopped for any reason but also has a value that is greater than 0
 		$LifetimeTimer.start()								#start it!
+	
+	#If the current map selected Map in the world is a certain value, change something	
+	if get_tree().root.get_node("World").selectedMap == 2: 	#If selected Map == Dungeon
+		$DungeonLight.show()								#Enable the light radius
 
 func _process(delta):
-	if $LifetimeTimer.get_time_left() <= 5 && not $DeathAnimator.is_playing():		#Handle the palying of the death animation (5s long) when the remaining lifetime is lower than 5 seconds
-		$DeathAnimator.play("endOfLife")											#play the death animation (will later trigger a signal to queue-free)
-	if $LifetimeTimer.get_time_left() == 5:
-		$PoofAnimation.show()
-		$PoofAnimation.play("impactDust")
+	if $LifetimeTimer.get_time_left() <= 5 && not $DeathAnimator.is_playing() && isAlive:		#Handle the playing of the death animation (5s long) when the remaining lifetime is lower than 5 seconds
+		$DeathAnimator.play("endOfLife")															#play the death animation (will later trigger a signal to queue-free)
+		isAlive = false
+#	if $LifetimeTimer.get_time_left() == 5:
+#		$PoofAnimation.show()
+#		$PoofAnimation.play("impactDust")
 
 func determineType():
 	#set the type to the current random number that is created on creation
@@ -81,6 +88,8 @@ func determineType():
 func updateIcon():
 	#Set the IconSprite texture to the texture that is linked to the enum position within the IconTexture array
 	$Sprite2DIcon.texture = iconTextures[type]
+	$Sprite2DIcon.show()
+	$Sprite2DShadow.show()
 	
 func _on_PowerUp_body_entered(body):			#Signal that gets triggered on touch
 	$DeathAnimator.stop()						#Stop Death Animation and any connected method calls if the powerUp is collected, preventing it from queue_free()
@@ -185,6 +194,7 @@ func playEffects():									#standartised effect order for this powerup
 	$Sprite2DIcon.hide()							#disable Sprite on collection
 	$Sprite2DShadow.hide()							#hide the shadow aswell
 	$CollisionShape2D.queue_free()					#delete the hitbox so it can´t be picked up twice
+	$DungeonLight.hide()
 	#Trigger two animations and sound
 	poofAnimation()
 	pickUpAnimation()
@@ -214,10 +224,12 @@ func _on_pick_up_sound_finished():					#remove powerup after sound has finished
 		queue_free()
 
 #Alternative Queue_Free that triggers if the death animation finishes
-func _on_death_animator_animation_finished():									#at death animation finish
+func _on_death_animator_animation_finished(animationName):						#at death animation finish
+	print("death animation finished")
 	$CollisionShape2D.queue_free()												#always disable hitbox
 	$Sprite2DIcon.queue_free()													#always delete the Sprite
 	$Sprite2DShadow.queue_free()												#and its icons
+	$DungeonLight.queue_free()													#and the light
 	poofAnimation()
 	if not $PickUpAnimation.is_playing() && not $PickUpSound.is_playing():		#don´t queue_free the whole node if an animation or sound is still playing
 		queue_free()															#if none is playing, queue free, otherwise those will queue free on them finishing

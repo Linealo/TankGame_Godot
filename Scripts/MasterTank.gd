@@ -229,7 +229,7 @@ func shoot():									#Shooting function for all tanks
 		
 		#Create the actual bullet
 		if shootTriple:
-			var TSbullets:Array = []
+			var TSbullets:Array = []  #Create an array only for this shot that stores all bullets shot at the same time
 			shootTriple -= 1
 			#Add 2 to every applicable modifier, so that all 3 bullets will have all thier bullets modified if an applicable modifier is active
 			if shootRocket > 0:
@@ -263,6 +263,7 @@ func createBullet():
 	var b = bullet.instantiate()											#load the bullet that has been selected at that scene via the export of the packed scene a top of this code
 	b.transform = $Canon/BulletSpawnPoint.global_transform 					#Set bullet transform postiion and rotation to the canons bullet spawn point rotation of that tank
 	b.shotPower = bulletDamage												#Set the bullets power level to this tanks bullet damage for this shot. Can be affected by other powerUps
+	
 	return b
 
 #Modifiers from the powerUps
@@ -307,6 +308,11 @@ func modifyBullets(b):
 		b.shotSpeed *= 1.5
 		b.rocketTrailActive = true
 		b.bounceAmount = 0
+	
+	#If the tank has no light on, disable it for the bullet as well
+	if $DungeonLight.is_visible():
+		b.get_node("DungeonLight").show()	
+		
 	#Return the bullet with all it´s added features
 	return b
 

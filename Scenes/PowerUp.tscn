@@ -287,6 +287,7 @@ _data = {
 }
 
 [node name="PowerUp" type="Area2D"]
+z_index = 15
 scale = Vector2(4, 4)
 collision_layer = 16
 collision_mask = 6
@@ -356,9 +357,13 @@ libraries = {
 "": SubResource("AnimationLibrary_n8njn")
 }
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="DungeonLight" type="PointLight2D" parent="."]
+visible = false
+color = Color(1, 0.839216, 0.752941, 1)
+energy = 1.1
 shadow_enabled = true
 texture = ExtResource("7_xr3l6")
+texture_scale = 0.4
 
 [connection signal="body_entered" from="." to="." method="_on_PowerUp_body_entered"]
 [connection signal="animation_finished" from="PickUpAnimation" to="." method="_on_pick_up_animation_finished"]

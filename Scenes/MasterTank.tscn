@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://Scripts/TankTracks.gd" id="3_tvlc4"]
 [ext_resource type="AudioStream" uid="uid://bl4r8m82yjax1" path="res://Sounds/Real_MetalKlank.wav" id="5_1wjfc"]
 [ext_resource type="Shader" path="res://Shader/HueCircling.gdshader" id="5_2hrtp"]
-[ext_resource type="Texture2D" uid="uid://b4tpdx52um5ec" path="res://Graphics/models/T_Grey_Wide.png" id="5_dfd83"]
+[ext_resource type="Texture2D" uid="uid://l6fuke78nwok" path="res://Graphics/models/T_Yellow_Wide.png" id="5_fhye8"]
 [ext_resource type="Script" path="res://Scripts/BulletTracer.gd" id="6_2shuy"]
 [ext_resource type="Texture2D" uid="uid://bk12ivopnueyd" path="res://Graphics/Collections/DuskIcons/Dusk_Icons_x24.png" id="7_5ges6"]
 [ext_resource type="Script" path="res://Scripts/Crosshair.gd" id="7_sk5y0"]
@@ -25,10 +25,9 @@
 [ext_resource type="Texture2D" uid="uid://cyq8kfmag7or8" path="res://Graphics/models/Shield/Shield_7.png" id="16_ikq21"]
 [ext_resource type="Texture2D" uid="uid://b7ymup5mbryhi" path="res://Graphics/Effects/light.png" id="24_7etbd"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ockoo"]
-resource_local_to_scene = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cpig3"]
 shader = ExtResource("5_2hrtp")
-shader_parameter/Shift_Hue = 0.0
+shader_parameter/Shift_Hue = null
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gwn2y"]
 size = Vector2(403.333, 320)
@@ -129,6 +128,12 @@ rotationSpeed = 5.0
 shotDelay = 2.0
 startHealth = 3
 dashDelay = 2.0
+fwKey = "P1_Forward"
+bwKey = "P1_Backward"
+rtlKey = "P1_RotateLeft"
+rtrKey = "P1_RotateRight"
+shootKey = "P1_Shoot"
+dashKey = "P1_Dash"
 
 [node name="TankTracks" type="GPUParticles2D" parent="."]
 show_behind_parent = true
@@ -143,8 +148,8 @@ script = ExtResource("3_tvlc4")
 
 [node name="Body" type="Sprite2D" parent="."]
 z_index = 1
-material = SubResource("ShaderMaterial_ockoo")
-texture = ExtResource("5_dfd83")
+material = SubResource("ShaderMaterial_cpig3")
+texture = ExtResource("5_fhye8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -199,11 +204,13 @@ flip_h = true
 [node name="AnimationHandler" parent="." instance=ExtResource("7_wp5jp")]
 visible = false
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="DungeonLight" type="PointLight2D" parent="."]
+visible = false
 scale = Vector2(4.41406, 4.41406)
+energy = 0.5
 shadow_enabled = true
 texture = ExtResource("24_7etbd")
-texture_scale = 1.5
+texture_scale = 5.0
 
 [node name="ShotTimer" type="Timer" parent="."]
 one_shot = true

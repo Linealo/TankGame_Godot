@@ -28,6 +28,7 @@ func _ready():
 		$SpawnDelay.start()														#start the timer
 
 func _process(delta):
+	$SpawnDelay.set_wait_time(spawnDelay)										#If the spawnDelay is updated for any reason, update the wait time as well
 	calcRandoms()
 	spawnPowerUp()
 
@@ -89,4 +90,4 @@ func chooseSpawnPosition():
 
 func _on_world_map_loaded():
 	spawnPositions = get_parent().get_node("WorldMap").markerPositions
-	print(spawnPositions.size())
+	#print(spawnPositions.size())
