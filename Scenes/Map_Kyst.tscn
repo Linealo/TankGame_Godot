@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://lxqabq6ldodq"]
+[gd_scene load_steps=8 format=3 uid="uid://lxqabq6ldodq"]
 
 [ext_resource type="Texture2D" uid="uid://djjvknxoyoxni" path="res://Graphics/Collections/Kyst/revolution.png" id="1_voq2q"]
 [ext_resource type="Texture2D" uid="uid://bn4n6iulqa0vw" path="res://Graphics/Collections/Kyst/revolution_tiles.png" id="2_u2dqm"]
+[ext_resource type="Script" path="res://Scripts/Maps.gd" id="3_1tux4"]
 [ext_resource type="PackedScene" uid="uid://cwnryqgu1h2dg" path="res://Scenes/HUD.tscn" id="3_smums"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u7mia"]
@@ -3929,6 +3930,7 @@ layer_3/y_sort_enabled = false
 layer_3/y_sort_origin = 0
 layer_3/z_index = -50
 layer_3/tile_data = PackedInt32Array()
+script = ExtResource("3_1tux4")
 
 [node name="HUD" parent="." instance=ExtResource("3_smums")]
 offset_top = 1202.0

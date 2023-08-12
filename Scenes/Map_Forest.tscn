@@ -1498,13 +1498,11 @@ script = ExtResource("2_6jcli")
 
 [node name="P1_Start" type="Marker2D" parent="."]
 position = Vector2(209.412, 637.647)
-scale = Vector2(1, 1)
 gizmo_extents = 20.0
 
 [node name="P2_Start" type="Marker2D" parent="."]
 position = Vector2(2022.35, 643.529)
 rotation = 3.14159
-scale = Vector2(1, 1)
 gizmo_extents = 20.0
 
 [node name="Spawn1" type="Marker2D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://rs65ur780i7r"]
+[gd_scene load_steps=36 format=3 uid="uid://rs65ur780i7r"]
 
 [ext_resource type="Script" path="res://Scripts/MasterTank.gd" id="1_d6udm"]
 [ext_resource type="Texture2D" uid="uid://nc5m8611ei02" path="res://Graphics/models/TankTracksWideV2.png" id="2_1be7q"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://b8gyam7sim1hm" path="res://Graphics/models/Shield/Shield_5.png" id="14_0algq"]
 [ext_resource type="Texture2D" uid="uid://be0folyca4kpq" path="res://Graphics/models/Shield/Shield_6.png" id="15_p58e6"]
 [ext_resource type="Texture2D" uid="uid://cyq8kfmag7or8" path="res://Graphics/models/Shield/Shield_7.png" id="16_ikq21"]
+[ext_resource type="Texture2D" uid="uid://b7ymup5mbryhi" path="res://Graphics/Effects/light.png" id="24_7etbd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ockoo"]
 resource_local_to_scene = true
@@ -197,6 +198,12 @@ flip_h = true
 
 [node name="AnimationHandler" parent="." instance=ExtResource("7_wp5jp")]
 visible = false
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(4.41406, 4.41406)
+shadow_enabled = true
+texture = ExtResource("24_7etbd")
+texture_scale = 1.5
 
 [node name="ShotTimer" type="Timer" parent="."]
 one_shot = true
