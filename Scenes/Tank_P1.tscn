@@ -87,3 +87,6 @@ region_rect = Rect2(56, 801, 288, 80)
 
 [node name="BulletSpawnPoint" parent="Canon" index="0"]
 position = Vector2(273, 0)
+
+[node name="DungeonLight" parent="." index="7"]
+shadow_item_cull_mask = 3

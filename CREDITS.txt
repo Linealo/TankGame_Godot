@@ -1,0 +1,32 @@
+Game Asset Credits
+
+
+TileSets:
+
+Beach		finalbossblues	https://finalbossblues.itch.io/tf-beach-tileset
+Catacombs	Szadi art	https://szadiart.itch.io/rogue-fantasy-catacombs
+Diverse		Kenny 		https://kenney-assets.itch.io
+
+
+
+Graphics:
+UI		bdragon1727	https://bdragon1727.itch.io/basic-pixel-health-bar-and-scroll-bar
+
+
+
+Animations:
+Explosions	ansimuz		https://ansimuz.itch.io/explosion-animations-pack
+Diverse		pimen		https://pimen.itch.io
+				i.e. Holy Effects, Ice Effects, Smoke N Dust and more
+Diverse		bdragon1727	https://bdragon1727.itch.io
+
+
+
+
+Music:
+Title Screen	joshuaempyre	https://freesound.org/people/joshuaempyre/sounds/251461/
+Level Theme	EVRetro		https://freesound.org/people/EVRetro/sounds/583613/		
+Pause Screen	Sunsai		https://freesound.org/people/Sunsai/sounds/415805/
+
+Shader:
+CRT Shader 	pend00		https://godotshaders.com/shader/vhs-and-crt-monitor-effect/ 

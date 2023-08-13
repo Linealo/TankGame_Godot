@@ -2,7 +2,7 @@
 
 extends Node2D
 
-class_name StatusBar
+class_name StatusBar 
 
 var health_3 = preload("res://Graphics/UI/PixelUI_Pack/Health_Separate/Health_3.png")
 var health_2 = preload("res://Graphics/UI/PixelUI_Pack/Health_Separate/Health_2.png")

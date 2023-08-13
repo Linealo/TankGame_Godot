@@ -62,6 +62,9 @@ region_rect = Rect2(56, 801, 288, 80)
 [node name="BulletSpawnPoint" parent="Canon" index="0"]
 position = Vector2(273, 0)
 
+[node name="DungeonLight" parent="." index="7"]
+energy = 0.35
+
 [node name="MenuDeathTimer" type="Timer" parent="." index="15"]
 wait_time = 15.0
 one_shot = true

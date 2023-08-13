@@ -93,8 +93,10 @@ func placePlayers():
 	if selectedMap == 3:
 		$Game/Tank_P1.moveSpeed = 180
 		$Game/Tank_P1.set_scale(Vector2(0.07,0.07))
+		$Game/Tank_P1/DungeonLight.show()
 		$Game/Tank_P2.moveSpeed = 180
 		$Game/Tank_P2.set_scale(Vector2(0.07,0.07))
+		$Game/Tank_P2/DungeonLight.show()
 		$Game/PowerUpSpawner.powerUpScale = 0.7
 
 ##Handles the potential start screen that could show up at the beginning of a game. Includes a countdown

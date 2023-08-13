@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/PowerUp.gd" id="1_0w10i"]
 [ext_resource type="Texture2D" uid="uid://uachftca312i" path="res://Graphics/Effects/CircularDropShadow.png" id="2_oopns"]
 [ext_resource type="PackedScene" uid="uid://bvv1o1aml57et" path="res://Scenes/AnimationHandler.tscn" id="3_f2gjf"]
-[ext_resource type="Texture2D" uid="uid://ccxwlec0i8q7f" path="res://Graphics/Collections/PixelLoot/Seperate/tile345.png" id="3_v06f3"]
+[ext_resource type="Texture2D" path="res://Graphics/Collections/PixelLoot/Seperate/tile345.png" id="3_v06f3"]
 [ext_resource type="AudioStream" uid="uid://cvvpmf4m6f4v" path="res://Sounds/Arcade_Collect2.wav" id="4_ujgaf"]
 [ext_resource type="Theme" uid="uid://sc8pk13o4m7a" path="res://Themes/DefaultTheme.tres" id="6_wp35o"]
 [ext_resource type="Texture2D" uid="uid://b7ymup5mbryhi" path="res://Graphics/Effects/light.png" id="7_xr3l6"]

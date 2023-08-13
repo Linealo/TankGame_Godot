@@ -39,7 +39,7 @@ shader_parameter/vignette_opacity = 0.81
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_j61j8")
-randomiseMap = true
+selectedMap = 2
 
 [node name="LevelMusicIntro" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_8co8p")
