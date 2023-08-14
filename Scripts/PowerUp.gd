@@ -69,6 +69,7 @@ func _ready():												#when created execute the following
 	#If the current map selected Map in the world is a certain value, change something	
 	if get_tree().root.get_node("World").selectedMap == 2: 	#If selected Map == Dungeon
 		$DungeonLight.show()								#Enable the light radius
+		$GeneralLight.show()
 
 func _process(delta):
 	if $LifetimeTimer.get_time_left() <= 5 && not $DeathAnimator.is_playing() && isAlive:		#Handle the playing of the death animation (5s long) when the remaining lifetime is lower than 5 seconds

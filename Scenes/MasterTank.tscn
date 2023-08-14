@@ -212,6 +212,13 @@ shadow_enabled = true
 texture = ExtResource("24_7etbd")
 texture_scale = 5.0
 
+[node name="GeneralLight" type="PointLight2D" parent="."]
+visible = false
+scale = Vector2(4.41406, 4.41406)
+energy = 0.6
+texture = ExtResource("24_7etbd")
+texture_scale = 5.0
+
 [node name="ShotTimer" type="Timer" parent="."]
 one_shot = true
 

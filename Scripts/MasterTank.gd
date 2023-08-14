@@ -310,9 +310,14 @@ func modifyBullets(b):
 		b.bounceAmount = 0
 	
 	#If the tank has no light on, disable it for the bullet as well
+	#NOTE: 
+	#DungeonLight is a light used on the dungeon map to cast shadows around corners
+	#GeneralLight is a light withou shadow properties to illuminate the surrounding regardless of occlusion shapes
 	if $DungeonLight.is_visible():
-		b.get_node("DungeonLight").show()	
-		
+		b.get_node("DungeonLight").show()
+	if $GeneralLight.is_visible():
+		b.get_node("GeneralLight").show()
+	
 	#Return the bullet with all it´s added features
 	return b
 
