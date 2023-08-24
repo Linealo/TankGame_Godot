@@ -19,13 +19,17 @@ enum Maps {												#List of maps
 	City,			#1
 	Dungeon,		#2
 	Kyst,			#3
+	BeachDount,		#4
+	BeachSides,		#5
 }
 @export var selectedMap: Maps							#Map selector for inspector if one wants to overwrite
 @export var mapScenes: Array[PackedScene] = [			#Add Maps in here or through inspector
 	preload("res://Scenes/Map_Forest.tscn"),			#Map 0 - Forest - Classic Battle Map
 	preload("res://Scenes/Map_City.tscn"),				#Map 1 - City - Big field, small passages
 	preload("res://Scenes/Map_Dungeon.tscn"),			#Map 2 - Dungeon - Welcome to the dark
-	preload("res://Scenes/Map_Kyst.tscn")				#Map 3 - Coastal - Open fire and few places to hide
+	preload("res://Scenes/Map_Kyst.tscn"),				#Map 3 - Coastal - Open fire and few places to hide
+	preload("res://Scenes/Map_Beach.tscn"),				#Map 4 - Beach Donut. Similiat to Kyst, but a generally tighter map.
+	preload("res://Scenes/Map_Beach_Sarah.tscn"),		#Map 5 - Another Beach Map but with opposite Island and players can´t meet.
 ]
 signal MapLoaded
 
@@ -87,7 +91,7 @@ func placePlayers():
 		$Game/Tank_P2/DungeonLight.show()
 		$Game/Tank_P2/GeneralLight.show()
 		$Game/PowerUpSpawner.spawnDelay = 10
-		$Game/PowerUpSpawner.spawnChance = 500
+		$Game/PowerUpSpawner.spawnChance = 350
 	else:
 		$Game/Tank_P1/DungeonLight.hide()
 		$Game/Tank_P2/GeneralLight.hide()
@@ -98,11 +102,9 @@ func placePlayers():
 		$Game/Tank_P1.moveSpeed = 180
 		$Game/Tank_P1.set_scale(Vector2(0.07,0.07))
 		$Game/Tank_P1/DungeonLight.show()
-		$Game/Tank_P1/GeneralLight.show()
 		$Game/Tank_P2.moveSpeed = 180
 		$Game/Tank_P2.set_scale(Vector2(0.07,0.07))
 		$Game/Tank_P2/DungeonLight.show()
-		$Game/Tank_P2/GeneralLight.show()
 		$Game/PowerUpSpawner.powerUpScale = 0.7
 
 ##Handles the potential start screen that could show up at the beginning of a game. Includes a countdown

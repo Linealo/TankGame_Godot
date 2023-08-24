@@ -11,6 +11,7 @@ var collider
 
 @export var trailScene : PackedScene		#export a slot where the little fire animation on the back of the bullet can be added into
 @export var rocketTrailScene: PackedScene	#export a slot for where the rocket bullet animation goes
+@export var aoeZone : PackedScene			#export a slot for the aoe damage zone
 
 @export var shotSpeed:float = 800			#Export the speed value
 @export var shotPower:int = 1				#Export the damage the bullet does in a set value to hurt objects that can receive damage
@@ -22,6 +23,9 @@ var bounceAmount:int = 1
 
 var canPierce = false
 var pierceStorage = null
+
+#Grenade flag
+var AoeDamage = false
 
 var rocketTrailActive = false
 
@@ -76,18 +80,28 @@ func impactHandling():
 	#update the collider after clearing the collision list to make the collider adressable
 	collider = collision.get_collider()
 	#print(collider)
-	print("Bullet pierce ", canPierce)
+	#print("Bullet pierce ", canPierce)
 	#Player hit detection - always damage tanks on hit 
-	if collider is Tank:											#listens to the area body hit, if it has the ability to get damaged and only execute if the one can damage flag is true
+	if collider is Tank && not AoeDamage:							#listens to the area body hit and checks if the granade is acrtive. If it is a tank and grenade is inactive, deal damage. 
 		collider.getDamaged(shotPower)								#calls the damage function of the hit body and transmits the shotPower of the current bullet to deal the set amount of damage
+		#Checks for grenade, because if Grenade is active, it will deal the damage instead
 	
 	#Handle what the bullet does after
 	if not canPierce:												#If the bullet can´t pierce and storage has no value written to it
-		if bounceAmount <= 0:										#Explode only if bullet can no longer reflect
+		#Explode only if bullet can no longer reflect
+		if bounceAmount <= 0:		
+			#If bullet is grenade
+			if AoeDamage:	
+				createAoeZone()							
+			#And explode after
 			explode(collider)										#calls the explosion function to delete the bullet and show animation / effect based on what it collides with
-		else:														#Otherwise bounce the bullet for as often at it can bounce (bounceAmount > 0) 
+		#Otherwise bounce the bullet for as often at it can bounce (bounceAmount > 0) 
+		else:														
 			#if it´s a bullet or a player, don´t bounce and still explode instead
 			if collider is Bullet || collider is Tank: 
+				#If bullet is grenade
+				if AoeDamage:	
+					createAoeZone()	
 				explode(collider)
 			#if its anything else, like a wall, bounce
 			else:									
@@ -159,6 +173,13 @@ func temporaryCollisionCheck():
 	#canPierce = false
 	pierceStorage = null 													#clear the storage
 	
+func createAoeZone():
+	var dmgZone = aoeZone.instantiate()
+	dmgZone.position = self.global_position
+	dmgZone.power = shotPower
+	dmgZone.set_scale(self.scale*2)
+	add_sibling(dmgZone)
+
 
 func handleRocketTrail():
 	var trail = rocketTrailScene.instantiate() as GPUParticles2D

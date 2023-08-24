@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://i0gkrtcu312w"]
+[gd_scene load_steps=15 format=3 uid="uid://i0gkrtcu312w"]
 
 [ext_resource type="Script" path="res://Scripts/MasterBullet.gd" id="1_2o4sj"]
 [ext_resource type="PackedScene" uid="uid://dw65nns24va6w" path="res://Scenes/bullet_particles_default.tscn" id="2_33wd7"]
 [ext_resource type="PackedScene" uid="uid://bwvj6g107faxw" path="res://Scenes/bullet_particles_rocket.tscn" id="2_gfexi"]
 [ext_resource type="PackedScene" uid="uid://bvv1o1aml57et" path="res://Scenes/AnimationHandler.tscn" id="4_fvgeb"]
+[ext_resource type="PackedScene" uid="uid://g5mppfepo3kg" path="res://Scenes/AoeExplosion.tscn" id="4_u54ug"]
 [ext_resource type="Texture2D" uid="uid://14cv0r3rvlje" path="res://Graphics/models/TankParts.png" id="4_w7cwq"]
 [ext_resource type="Texture2D" uid="uid://bufkakkvh61f1" path="res://Graphics/Effects/FireEffects/Fire Effect 1/Firebolt SpriteSheet.png" id="5_b0e14"]
 [ext_resource type="Texture2D" uid="uid://b7ymup5mbryhi" path="res://Graphics/Effects/light.png" id="7_axmmr"]
@@ -55,6 +56,7 @@ collision_mask = 15
 script = ExtResource("1_2o4sj")
 trailScene = ExtResource("2_33wd7")
 rocketTrailScene = ExtResource("2_gfexi")
+aoeZone = ExtResource("4_u54ug")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(76, 0)
@@ -94,7 +96,7 @@ collide_with_areas = true
 
 [node name="WallPierce" type="Timer" parent="."]
 process_callback = 0
-wait_time = 0.25
+wait_time = 0.35
 one_shot = true
 
 [node name="DungeonLight" type="PointLight2D" parent="."]

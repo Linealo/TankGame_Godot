@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://g510njiavpr0"]
+[gd_scene load_steps=18 format=3 uid="uid://g510njiavpr0"]
 
 [ext_resource type="Script" path="res://Scripts/PowerUp.gd" id="1_0w10i"]
 [ext_resource type="Texture2D" uid="uid://uachftca312i" path="res://Graphics/Effects/CircularDropShadow.png" id="2_oopns"]
+[ext_resource type="Texture2D" uid="uid://cllq5e7ocr8jb" path="res://Graphics/Collections/PixelLoot/Seperate/tile345.png" id="3_dkhc0"]
 [ext_resource type="PackedScene" uid="uid://bvv1o1aml57et" path="res://Scenes/AnimationHandler.tscn" id="3_f2gjf"]
 [ext_resource type="AudioStream" uid="uid://cvvpmf4m6f4v" path="res://Sounds/Arcade_Collect2.wav" id="4_ujgaf"]
 [ext_resource type="Theme" uid="uid://sc8pk13o4m7a" path="res://Themes/DefaultTheme.tres" id="6_wp35o"]
@@ -302,6 +303,7 @@ texture = ExtResource("2_oopns")
 [node name="Sprite2DIcon" type="Sprite2D" parent="."]
 position = Vector2(0, -6)
 scale = Vector2(4, 4)
+texture = ExtResource("3_dkhc0")
 region_rect = Rect2(531, 227, 12, 13)
 
 [node name="PoofAnimation" parent="." instance=ExtResource("3_f2gjf")]

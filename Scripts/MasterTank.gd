@@ -237,7 +237,9 @@ func shoot():									#Shooting function for all tanks
 			if shootWide > 0:
 				shootWide += 2
 			if shootPiercing > 0:
-				shootPiercing +=2
+				shootPiercing += 2
+			if shootGrenade > 0:
+				shootGrenade += 2
 			#Spawn 3 Bullets and spread them by a rotation value
 			for angle in [-0.1, 0, 0.1]:
 				var b = createBullet()
@@ -302,6 +304,10 @@ func modifyBullets(b):
 	if shootPiercing > 0:
 		b.canPierce = true
 		shootPiercing -= 1
+		
+	if shootGrenade > 0:
+		b.AoeDamage = true
+		shootGrenade -= 1
 		
 	#Ultimode uses rocketbullets
 	if ultiMode:
