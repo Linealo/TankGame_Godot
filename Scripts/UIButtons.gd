@@ -9,7 +9,7 @@ extends Button
 @export var volumeOffset:float = -6
 
 #Create a new AudioPlayer
-var audioManager:AudioStreamPlayer = AudioStreamPlayer.new()
+@onready var audioManager:AudioStreamPlayer = AudioStreamPlayer.new()
 
 #Instantiate it as a new child on the tree and assign the set paths and values on load
 func _ready():
@@ -17,6 +17,7 @@ func _ready():
 	add_child(audioManager)
 	audioManager.set_stream(sound[0])						#Assign default sound
 	audioManager.set_volume_db(volumeOffset)
+	audioManager.set_bus("SFX")
 
 #Call play on the AudioManager
 func playSound():

@@ -265,21 +265,25 @@ one_shot = true
 stream = ExtResource("2_24dvm")
 volume_db = 10.124
 attenuation = 1.51572
+bus = &"SFX"
 
 [node name="Sound_BulletKlink" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_6o328")
 volume_db = 7.436
 attenuation = 1.51572
+bus = &"SFX"
 
 [node name="Sound_Death" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_tklmg")
 volume_db = 12.885
 attenuation = 2.54912
+bus = &"SFX"
 
 [node name="Sound_Hurt" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_1wjfc")
 volume_db = 11.044
 attenuation = 2.54912
+bus = &"SFX"
 
 [node name="StatusBar" parent="." instance=ExtResource("2_k3uo6")]
 visible = false

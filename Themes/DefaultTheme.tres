@@ -1,7 +1,8 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://sc8pk13o4m7a"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://sc8pk13o4m7a"]
 
 [ext_resource type="FontFile" uid="uid://dpf2splurp666" path="res://Fonts/VT323-Regular.ttf" id="1_v10jp"]
 [ext_resource type="Texture2D" uid="uid://clwupnl5b8vp6" path="res://Graphics/UI/MounirTohamiGUI.png" id="2_4oeit"]
+[ext_resource type="Texture2D" uid="uid://b7h8m6yaqj4bg" path="res://Graphics/UI/WhiteDot.svg" id="3_6ytak"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hmnrj"]
 content_margin_left = 4.0
@@ -39,6 +40,13 @@ content_margin_bottom = 25.0
 texture = ExtResource("2_4oeit")
 region_rect = Rect2(145, 98, 46, 13)
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_v1cx1"]
+diffuse_texture = ExtResource("3_6ytak")
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_swbw1"]
+color = Color(0.764706, 0.345098, 0, 1)
+thickness = 29
+
 [resource]
 default_font = ExtResource("1_v10jp")
 default_font_size = 100
@@ -65,3 +73,12 @@ Button/styles/focus = null
 Button/styles/hover = SubResource("StyleBoxTexture_hxe7q")
 Button/styles/normal = SubResource("StyleBoxTexture_06k0v")
 Button/styles/pressed = SubResource("StyleBoxTexture_1ilb5")
+HSlider/constants/center_grabber = 0
+HSlider/constants/grabber_offset = 0
+HSlider/icons/grabber = SubResource("CanvasTexture_v1cx1")
+HSlider/icons/grabber_disabled = ExtResource("3_6ytak")
+HSlider/icons/grabber_highlight = ExtResource("3_6ytak")
+HSlider/icons/tick = null
+HSlider/styles/grabber_area = null
+HSlider/styles/grabber_area_highlight = null
+HSlider/styles/slider = SubResource("StyleBoxLine_swbw1")

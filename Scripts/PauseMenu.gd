@@ -36,7 +36,22 @@ func _on_continue_pressed():
 	closePauseMenu()
 
 func _on_options_pressed():
-	pass # Replace with function body.
+	if not $Options.visible:
+		$Options.show()
+		$Main/VBoxContainer2/VBoxContainer/Options.hide()
+		$Main/VBoxContainer2/VBoxContainer/Controls.show()
+		$Main/VBoxContainer2/VBoxContainer/Controls.grab_focus()
+	if $Controls.visible:
+		$Controls.hide()
+		
+func _on_controls_pressed():
+	if not $Controls.visible:
+		$Controls.show()
+		$Main/VBoxContainer2/VBoxContainer/Options.show()
+		$Main/VBoxContainer2/VBoxContainer/Controls.hide()
+		$Main/VBoxContainer2/VBoxContainer/Options.grab_focus()
+	if $Options.visible:
+		$Options.hide()
 
 #back to Main Menu - Always close Menu and force unpause of tree
 func _on_main_menu_pressed():

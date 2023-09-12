@@ -18,7 +18,12 @@ func _on_start_pressed():												#Signal listening to the Start Button being
 	#Will later instead make the cursor jump to a Game Settings Menu for Mode, Player, Map and Rule select
 
 func _on_options_pressed():												#Signal listening to the Options Button being pressed
-	pass # Replace with function body.									#opens the options menu screen scene, hiding the current menu
+	#opens the options menu screen scene, hiding the current menu
+	if not $Options.visible:
+		$Options.show()
+		$Options/BackToMainMenu.grab_focus()
+	if $MainMenu.visible:
+		$MainMenu.hide()									
 
 func _on_credits_pressed():												#Signal listening to the Credits Button being pressed
 	if not $Credits.visible:
@@ -36,6 +41,8 @@ func _on_back_to_main_menu_pressed():									#Back to Menu button
 func returnToMM():														#Function that return to the mainMenu 
 	if $Credits.visible:
 		$Credits.hide()
+	if $Options.visible:
+		$Options.hide()
 	if not $MainMenu.visible:
 		$MainMenu.show()
 		$MainMenu/VBoxContainer/Start.grab_focus()

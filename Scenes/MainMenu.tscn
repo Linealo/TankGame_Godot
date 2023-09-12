@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://4w13qfq3acso"]
+[gd_scene load_steps=17 format=3 uid="uid://4w13qfq3acso"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_5figv"]
 [ext_resource type="PackedScene" uid="uid://n17bp6ihk60" path="res://Scenes/MenuBackground.tscn" id="2_7uklg"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cptuvhgxq65op" path="res://Graphics/UI/Title_Credits_1.png" id="6_qle6j"]
 [ext_resource type="Texture2D" uid="uid://o0dmpc3pbiyi" path="res://Graphics/UI/Logo_Hochschule_Bremerhaven_Bitted.png" id="7_jnyhe"]
 [ext_resource type="FontFile" uid="uid://dpf2splurp666" path="res://Fonts/VT323-Regular.ttf" id="8_lu7ut"]
+[ext_resource type="Script" path="res://Scenes/AudioSlider.gd" id="8_mqae0"]
 [ext_resource type="PackedScene" uid="uid://cdaa2u7w22qqj" path="res://Scenes/CRTShader.tscn" id="9_j1w8e"]
 
 [sub_resource type="Shader" id="Shader_uai6i"]
@@ -40,6 +41,8 @@ script = ExtResource("1_5figv")
 stream = ExtResource("4_oiqly")
 volume_db = -6.679
 autoplay = true
+mix_target = 1
+bus = &"Music"
 
 [node name="MenuBackground" parent="." instance=ExtResource("2_7uklg")]
 position = Vector2(0, -420)
@@ -85,7 +88,6 @@ focus_neighbor_top = NodePath("../Quit")
 text = "Start"
 
 [node name="Options" parent="MainMenu/VBoxContainer" instance=ExtResource("6_2444h")]
-visible = false
 layout_mode = 2
 text = "Options"
 
@@ -108,7 +110,7 @@ anchor_left = 0.19641
 anchor_top = 0.0691667
 anchor_right = 0.823122
 anchor_bottom = 0.392958
-offset_left = -1.4993
+offset_left = -1.49948
 offset_top = -2.99999
 offset_right = -657.588
 offset_bottom = -212.55
@@ -116,6 +118,84 @@ grow_horizontal = 2
 scale = Vector2(2.17067, 2.17067)
 texture = ExtResource("6_ix4oe")
 metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Options"]
+offset_left = 408.0
+offset_top = 490.0
+offset_right = 1578.0
+offset_bottom = 970.0
+color = Color(0, 0, 0.101961, 0.756863)
+
+[node name="Label" type="Label" parent="Options"]
+offset_left = 472.0
+offset_top = 562.0
+offset_right = 872.0
+offset_bottom = 665.0
+scale = Vector2(0.902153, 0.902153)
+theme = ExtResource("4_rpg0w")
+text = "Main Audio"
+
+[node name="Label2" type="Label" parent="Options"]
+offset_left = 472.0
+offset_top = 699.0
+offset_right = 872.0
+offset_bottom = 802.0
+scale = Vector2(0.902153, 0.902153)
+theme = ExtResource("4_rpg0w")
+text = "Music"
+
+[node name="Label3" type="Label" parent="Options"]
+offset_left = 472.0
+offset_top = 839.0
+offset_right = 872.0
+offset_bottom = 942.0
+scale = Vector2(0.902153, 0.902153)
+theme = ExtResource("4_rpg0w")
+text = "SFX"
+
+[node name="master" type="HSlider" parent="Options"]
+offset_left = 896.0
+offset_top = 583.0
+offset_right = 1507.0
+offset_bottom = 645.0
+theme = ExtResource("4_rpg0w")
+max_value = 1.0
+step = 0.001
+value = 0.5
+script = ExtResource("8_mqae0")
+BUS_name = "Master"
+
+[node name="music" type="HSlider" parent="Options"]
+offset_left = 896.0
+offset_top = 721.0
+offset_right = 1507.0
+offset_bottom = 783.0
+theme = ExtResource("4_rpg0w")
+max_value = 1.0
+step = 0.001
+value = 0.5
+script = ExtResource("8_mqae0")
+BUS_name = "Music"
+
+[node name="sfx" type="HSlider" parent="Options"]
+offset_left = 896.0
+offset_top = 859.0
+offset_right = 1507.0
+offset_bottom = 921.0
+theme = ExtResource("4_rpg0w")
+max_value = 1.0
+step = 0.001
+value = 0.5
+script = ExtResource("8_mqae0")
+BUS_name = "SFX"
+
+[node name="BackToMainMenu" parent="Options" instance=ExtResource("6_2444h")]
+offset_left = 1186.0
+offset_top = 1015.0
+offset_right = 1638.0
+offset_bottom = 1125.0
+text = "Main Menu
+"
 
 [node name="Credits" type="CanvasLayer" parent="."]
 visible = false
@@ -192,7 +272,7 @@ text = "38378"
 layout_mode = 2
 theme = ExtResource("4_rpg0w")
 theme_override_font_sizes/font_size = 60
-text = "XXXXX"
+text = "38337"
 
 [node name="School" type="VBoxContainer" parent="Credits/HSplitContainer/Information"]
 layout_mode = 2
@@ -312,7 +392,7 @@ theme_override_constants/separation = 0
 [node name="joshuaempyre" type="Label" parent="Credits/HSplitContainer/Other/Asstes/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
-text = "joshuaempyre"
+text = "FreeSound.org"
 
 [node name="ItchIo" type="Label" parent="Credits/HSplitContainer/Other/Asstes/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
@@ -427,4 +507,5 @@ text = "@2023"
 [connection signal="pressed" from="MainMenu/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Options/BackToMainMenu" to="." method="_on_back_to_main_menu_pressed"]
 [connection signal="pressed" from="Credits/BackToMainMenu" to="." method="_on_back_to_main_menu_pressed"]

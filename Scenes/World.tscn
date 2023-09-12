@@ -45,9 +45,11 @@ selectedMap = 4
 [node name="LevelMusicIntro" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_8co8p")
 autoplay = true
+bus = &"Music"
 
 [node name="LevelMusicLoop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_jrm3l")
+bus = &"Music"
 
 [node name="Game" type="CanvasLayer" parent="."]
 layer = 0

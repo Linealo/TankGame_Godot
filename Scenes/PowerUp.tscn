@@ -333,6 +333,7 @@ libraries = {
 [node name="PickUpSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_ujgaf")
 attenuation = 1.1487
+bus = &"SFX"
 
 [node name="LifetimeTimer" type="Timer" parent="."]
 wait_time = 20.0

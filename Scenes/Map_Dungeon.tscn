@@ -6563,6 +6563,7 @@ rotation = -3.14159
 gizmo_extents = 20.0
 
 [node name="Spawn10" type="Marker2D" parent="."]
+visible = false
 position = Vector2(172, 394)
 rotation = -3.14159
 gizmo_extents = 20.0
@@ -6911,11 +6912,10 @@ script = ExtResource("8_diomy")
 [node name="ExperimentalLight" type="PointLight2D" parent="."]
 visible = false
 y_sort_enabled = true
-position = Vector2(546.5, 461.5)
+position = Vector2(498, 320)
 rotation = -0.217121
 scale = Vector2(0.548972, 1.94554)
 energy = 2.05
-shadow_enabled = true
 shadow_filter_smooth = 3.5
 texture = ExtResource("4_kva1o")
 texture_scale = 2.05

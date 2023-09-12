@@ -215,11 +215,11 @@ func shoot():									#Shooting function for all tanks
 	if not canShoot:							#if "canShoot" is false, skip the whole shooting thingy
 		return
 	elif canShoot:								#if can shoot is true, then allow for shooting
-		canShoot = false						#if canShoot was true, set canShoot to false now to avoid another shot
-		$ShotTimer.start()						#start the shot delay timer to count down towards 0, where it will reset later
 		#play sound for shooting
 		$Sound_BulletKlink.play()
 		$Sound_BulletShot.play()
+		canShoot = false						#if canShoot was true, set canShoot to false now to avoid another shot
+		$ShotTimer.start()						#start the shot delay timer to count down towards 0, where it will reset later
 		#play animation at muzzle location
 		$MuzzleFire.show()
 		$MuzzleFire.position = $Canon/BulletSpawnPoint.position

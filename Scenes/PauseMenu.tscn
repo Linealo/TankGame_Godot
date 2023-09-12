@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cnpxbag7w6e06"]
+[gd_scene load_steps=7 format=3 uid="uid://cnpxbag7w6e06"]
 
 [ext_resource type="Script" path="res://Scripts/PauseMenu.gd" id="1_bppox"]
 [ext_resource type="Theme" uid="uid://sc8pk13o4m7a" path="res://Themes/DefaultTheme.tres" id="2_yrv6n"]
 [ext_resource type="PackedScene" uid="uid://boevsd2mkn655" path="res://Scenes/UIButtons.tscn" id="3_iiwy2"]
 [ext_resource type="PackedScene" uid="uid://dpc7oxwud2dot" path="res://Scenes/KeyAnimations.tscn" id="3_pqxje"]
 [ext_resource type="AudioStream" uid="uid://cfuglc6mfn6cn" path="res://Sounds/Music_Menu_Pause_Edited.wav" id="4_ia8w5"]
+[ext_resource type="Script" path="res://Scenes/AudioSlider.gd" id="6_5ydrr"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
@@ -42,14 +43,16 @@ anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -264.0
-offset_top = -132.0
+offset_top = -70.0
 offset_right = 264.0
+offset_bottom = 62.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Main"]
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
+theme = ExtResource("2_yrv6n")
 theme_override_constants/separation = 616
 
 [node name="Pause Title" type="Label" parent="Main/VBoxContainer2"]
@@ -70,177 +73,275 @@ focus_neighbor_top = NodePath("../Main Menu")
 text = "Continue"
 
 [node name="Options" parent="Main/VBoxContainer2/VBoxContainer" instance=ExtResource("3_iiwy2")]
-visible = false
 layout_mode = 2
 text = "Options"
+
+[node name="Controls" parent="Main/VBoxContainer2/VBoxContainer" instance=ExtResource("3_iiwy2")]
+visible = false
+layout_mode = 2
+text = "Controls
+"
 
 [node name="Main Menu" parent="Main/VBoxContainer2/VBoxContainer" instance=ExtResource("3_iiwy2")]
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../Continue")
 text = "Main Menu"
 
-[node name="InfoText" type="VBoxContainer" parent="."]
+[node name="Controls" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="InfoText" type="VBoxContainer" parent="Controls"]
 layout_mode = 2
-offset_left = 298.0
-offset_top = 197.0
-offset_right = 1682.0
-offset_bottom = 303.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 284.0
+offset_top = 200.0
+offset_right = 1668.0
+offset_bottom = 306.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("2_yrv6n")
 theme_override_constants/separation = -60
 
-[node name="Label" type="Label" parent="InfoText"]
+[node name="Label" type="Label" parent="Controls/InfoText"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Controls"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="InfoText"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Controls/InfoText"]
 layout_mode = 2
 theme_override_constants/separation = 1000
 alignment = 1
 
-[node name="Label3" type="Label" parent="InfoText/HBoxContainer"]
+[node name="Label3" type="Label" parent="Controls/InfoText/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "Player 1
 "
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="InfoText/HBoxContainer"]
+[node name="Label2" type="Label" parent="Controls/InfoText/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "Player 2"
 horizontal_alignment = 1
 
-[node name="Keys" type="Container" parent="."]
+[node name="Keys" type="Control" parent="Controls"]
 layout_mode = 2
-offset_right = 1950.0
-offset_bottom = 511.0
+anchors_preset = 0
 
-[node name="W" parent="Keys" instance=ExtResource("3_pqxje")]
+[node name="W" parent="Controls/Keys" instance=ExtResource("3_pqxje")]
 position = Vector2(380, 386.5)
 scale = Vector2(5, 5)
 animation = &"W"
 autoplay = "W"
 
-[node name="A" parent="Keys" instance=ExtResource("3_pqxje")]
+[node name="A" parent="Controls/Keys" instance=ExtResource("3_pqxje")]
 position = Vector2(264, 502.5)
 scale = Vector2(5, 5)
 animation = &"A"
 autoplay = "A"
 
-[node name="S" parent="Keys" instance=ExtResource("3_pqxje")]
+[node name="S" parent="Controls/Keys" instance=ExtResource("3_pqxje")]
 position = Vector2(380, 502.5)
 scale = Vector2(5, 5)
 autoplay = "S"
 
-[node name="D" parent="Keys" instance=ExtResource("3_pqxje")]
+[node name="D" parent="Controls/Keys" instance=ExtResource("3_pqxje")]
 position = Vector2(494, 502.5)
 scale = Vector2(5, 5)
 animation = &"D"
 autoplay = "D"
 
-[node name="Space" parent="Keys" instance=ExtResource("3_pqxje")]
+[node name="Space" parent="Controls/Keys" instance=ExtResource("3_pqxje")]
 position = Vector2(380, 637)
 scale = Vector2(5, 5)
 animation = &"Space"
 autoplay = "Space"
 
-[node name="Up" parent="Keys" instance=ExtResource("3_pqxje")]
+[node name="Up" parent="Controls/Keys" instance=ExtResource("3_pqxje")]
 position = Vector2(1579.5, 386.5)
 scale = Vector2(5, 5)
 animation = &"Up"
 autoplay = "Up"
 
-[node name="Down" parent="Keys" instance=ExtResource("3_pqxje")]
+[node name="Down" parent="Controls/Keys" instance=ExtResource("3_pqxje")]
 position = Vector2(1579.5, 502.5)
 scale = Vector2(5, 5)
 animation = &"Down"
 autoplay = "Down"
 
-[node name="Left" parent="Keys" instance=ExtResource("3_pqxje")]
+[node name="Left" parent="Controls/Keys" instance=ExtResource("3_pqxje")]
 position = Vector2(1463.5, 502.5)
 scale = Vector2(5, 5)
 animation = &"Left"
 autoplay = "Left"
 
-[node name="Right" parent="Keys" instance=ExtResource("3_pqxje")]
+[node name="Right" parent="Controls/Keys" instance=ExtResource("3_pqxje")]
 position = Vector2(1693.5, 502.5)
 scale = Vector2(5, 5)
 animation = &"Right"
 autoplay = "Right"
 
-[node name="0" parent="Keys" instance=ExtResource("3_pqxje")]
+[node name="0" parent="Controls/Keys" instance=ExtResource("3_pqxje")]
 position = Vector2(1581, 636)
 scale = Vector2(5, 5)
 animation = &"0"
 autoplay = "0"
 
-[node name="Movement3" type="Label" parent="."]
+[node name="Container" type="Control" parent="Controls"]
 layout_mode = 2
-offset_left = 661.0
-offset_top = 474.0
-offset_right = 837.0
-offset_bottom = 517.0
+anchors_preset = 0
+offset_left = 888.0
+offset_top = 456.0
+offset_right = 888.0
+offset_bottom = 456.0
+
+[node name="Movement3" type="Label" parent="Controls/Container"]
+layout_mode = 2
+offset_left = -237.0
+offset_top = 35.0
+offset_right = -61.0
+offset_bottom = 78.0
 theme = ExtResource("2_yrv6n")
 theme_override_font_sizes/font_size = 40
 text = "Rotate Left"
 horizontal_alignment = 1
 
-[node name="Movement2" type="Label" parent="."]
+[node name="Movement2" type="Label" parent="Controls/Container"]
 layout_mode = 2
-offset_left = 903.0
-offset_top = 474.0
-offset_right = 1047.0
-offset_bottom = 517.0
+offset_left = 19.0
+offset_top = 30.0
+offset_right = 163.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("2_yrv6n")
 theme_override_font_sizes/font_size = 40
 text = "Backwards
 "
 horizontal_alignment = 1
 
-[node name="Movement4" type="Label" parent="."]
+[node name="Movement4" type="Label" parent="Controls/Container"]
 layout_mode = 2
-offset_left = 1110.0
-offset_top = 474.0
-offset_right = 1302.0
-offset_bottom = 517.0
+offset_left = 239.0
+offset_top = 31.0
+offset_right = 431.0
+offset_bottom = 74.0
 theme = ExtResource("2_yrv6n")
 theme_override_font_sizes/font_size = 40
 text = "Rotate Right"
 horizontal_alignment = 1
 
-[node name="Movement" type="Label" parent="."]
+[node name="Movement" type="Label" parent="Controls/Container"]
 layout_mode = 2
-offset_left = 916.0
-offset_top = 363.0
-offset_right = 1028.0
-offset_bottom = 406.0
+offset_left = 32.0
+offset_top = -88.0
+offset_right = 144.0
+offset_bottom = -45.0
 theme = ExtResource("2_yrv6n")
 theme_override_font_sizes/font_size = 40
 text = "Forward"
 horizontal_alignment = 1
 
-[node name="Movement5" type="Label" parent="."]
+[node name="Movement5" type="Label" parent="Controls/Container"]
 layout_mode = 2
-offset_left = 884.0
-offset_top = 606.0
-offset_right = 1076.0
-offset_bottom = 649.0
+offset_top = 146.0
+offset_right = 192.0
+offset_bottom = 189.0
 theme = ExtResource("2_yrv6n")
 theme_override_font_sizes/font_size = 40
 text = "Shoot Bullet
 "
 horizontal_alignment = 1
 
+[node name="Options" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="InfoText" type="Label" parent="Options"]
+layout_mode = 2
+offset_left = 821.0
+offset_top = 210.0
+offset_right = 1101.0
+offset_bottom = 313.0
+size_flags_horizontal = 4
+theme = ExtResource("2_yrv6n")
+text = "Options"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Options"]
+layout_mode = 2
+offset_left = 403.0
+offset_top = 322.0
+offset_right = 843.0
+offset_bottom = 425.0
+theme = ExtResource("2_yrv6n")
+text = "Main Volume"
+
+[node name="Label2" type="Label" parent="Options"]
+layout_mode = 2
+offset_left = 404.0
+offset_top = 450.0
+offset_right = 884.0
+offset_bottom = 553.0
+theme = ExtResource("2_yrv6n")
+text = "Music Volume"
+
+[node name="Label3" type="Label" parent="Options"]
+layout_mode = 2
+offset_left = 402.0
+offset_top = 581.0
+offset_right = 802.0
+offset_bottom = 684.0
+theme = ExtResource("2_yrv6n")
+text = "SFX Volume"
+
+[node name="master" type="HSlider" parent="Options"]
+layout_mode = 0
+offset_left = 930.0
+offset_top = 342.0
+offset_right = 1541.0
+offset_bottom = 404.0
+theme = ExtResource("2_yrv6n")
+max_value = 1.0
+step = 0.001
+script = ExtResource("6_5ydrr")
+BUS_name = "Master"
+
+[node name="music" type="HSlider" parent="Options"]
+layout_mode = 0
+offset_left = 930.0
+offset_top = 480.0
+offset_right = 1541.0
+offset_bottom = 542.0
+theme = ExtResource("2_yrv6n")
+max_value = 1.0
+step = 0.001
+script = ExtResource("6_5ydrr")
+BUS_name = "Music"
+
+[node name="sfx" type="HSlider" parent="Options"]
+layout_mode = 0
+offset_left = 930.0
+offset_top = 618.0
+offset_right = 1541.0
+offset_bottom = 680.0
+theme = ExtResource("2_yrv6n")
+max_value = 1.0
+step = 0.001
+script = ExtResource("6_5ydrr")
+BUS_name = "SFX"
+
 [node name="PauseMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_ia8w5")
 pitch_scale = 0.96
+bus = &"Music"
 
 [connection signal="pressed" from="Main/VBoxContainer2/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer2/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer2/VBoxContainer/Controls" to="." method="_on_controls_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer2/VBoxContainer/Main Menu" to="." method="_on_main_menu_pressed"]
